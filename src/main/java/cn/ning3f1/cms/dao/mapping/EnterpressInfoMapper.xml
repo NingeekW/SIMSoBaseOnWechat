@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.cms.dao.EnterpressInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.cms.domain.EnterpressInfo" >
+    <id column="EN_ID" property="enId" jdbcType="DECIMAL" />
+    <result column="EN_NAME" property="enName" jdbcType="VARCHAR" />
+    <result column="EN_LINKMAN" property="enLinkman" jdbcType="VARCHAR" />
+    <result column="EN_TELEPHONE" property="enTelephone" jdbcType="VARCHAR" />
+    <result column="EN_ADDRESS" property="enAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EN_ID, EN_NAME, EN_LINKMAN, EN_TELEPHONE, EN_ADDRESS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ENTERPRESS_INFO
+    where EN_ID = #{enId,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectByName_page" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ENTERPRESS_INFO
+    where EN_NAME like #{enName,jdbcType=VARCHAR}
+  </select>
+   <select id="selectAll" resultMap="BaseResultMap"  >
+    select *
+    from ENTERPRESS_INFO
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ENTERPRESS_INFO
+    where EN_ID = #{enId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.cms.domain.EnterpressInfo" >
+    insert into ENTERPRESS_INFO (EN_ID, EN_NAME, EN_LINKMAN, 
+      EN_TELEPHONE, EN_ADDRESS)
+    values (#{enId,jdbcType=DECIMAL}, #{enName,jdbcType=VARCHAR}, #{enLinkman,jdbcType=VARCHAR}, 
+      #{enTelephone,jdbcType=VARCHAR}, #{enAddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.cms.domain.EnterpressInfo" >
+    insert into ENTERPRESS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enId != null" >
+        EN_ID,
+      </if>
+      <if test="enName != null" >
+        EN_NAME,
+      </if>
+      <if test="enLinkman != null" >
+        EN_LINKMAN,
+      </if>
+      <if test="enTelephone != null" >
+        EN_TELEPHONE,
+      </if>
+      <if test="enAddress != null" >
+        EN_ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enId != null" >
+        #{enId,jdbcType=DECIMAL},
+      </if>
+      <if test="enName != null" >
+        #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="enLinkman != null" >
+        #{enLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="enTelephone != null" >
+        #{enTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="enAddress != null" >
+        #{enAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.cms.domain.EnterpressInfo" >
+    update ENTERPRESS_INFO
+    <set >
+      <if test="enName != null" >
+        EN_NAME = #{enName,jdbcType=VARCHAR},
+      </if>
+      <if test="enLinkman != null" >
+        EN_LINKMAN = #{enLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="enTelephone != null" >
+        EN_TELEPHONE = #{enTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="enAddress != null" >
+        EN_ADDRESS = #{enAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where EN_ID = #{enId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.cms.domain.EnterpressInfo" >
+    update ENTERPRESS_INFO
+    set EN_NAME = #{record.enName,jdbcType=VARCHAR},
+      EN_LINKMAN = #{record.enLinkman,jdbcType=VARCHAR},
+      EN_TELEPHONE = #{record.enTelephone,jdbcType=VARCHAR},
+      EN_ADDRESS = #{record.enAddress,jdbcType=VARCHAR}
+    where EN_ID = #{record.enId,jdbcType=DECIMAL}
+  </update>
+  <select id="selectalltEnterpress_page" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select EN_ID, EN_NAME, EN_LINKMAN, EN_TELEPHONE, EN_ADDRESS 
+     from ENTERPRESS_INFO 
+  </select>
+  
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.cms.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.cms.domain.Course" >
+    <id column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="CHAR" />
+    <result column="credit" property="credit" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    course_id, course_name, credit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.cms.domain.Course" >
+    insert into course (course_id, course_name, credit
+      )
+    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=CHAR}, #{credit,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.cms.domain.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=CHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.cms.domain.Course" >
+    update course
+    <set >
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=CHAR},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.cms.domain.Course" >
+    update course
+    set course_name = #{courseName,jdbcType=CHAR},
+      credit = #{credit,jdbcType=INTEGER}
+    where course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+</mapper>

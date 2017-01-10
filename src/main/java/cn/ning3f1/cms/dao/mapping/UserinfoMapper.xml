@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.cms.dao.UserinfoMapper">
+	<resultMap id="BaseResultMap" type="cn.ning3f1.cms.domain.Userinfo">
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+		<result column="DEP_ID" property="depId" jdbcType="VARCHAR" />
+		<result column="STATE" property="state" jdbcType="CHAR" />
+	</resultMap>
+	<insert id="insert" parameterType="cn.ning3f1.cms.domain.Userinfo">
+		insert into USERINFO (USERNAME, PASSWORD, NAME,
+		PHONE, EMAIL, ROLE_ID,
+		DEP_ID, STATE)
+		values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{roleId,jdbcType=DECIMAL},
+		#{depId,jdbcType=VARCHAR}, #{state,jdbcType=CHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.ning3f1.cms.domain.Userinfo">
+		insert into USERINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="password != null">
+				PASSWORD,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="phone != null">
+				PHONE,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="roleId != null">
+				ROLE_ID,
+			</if>
+			<if test="depId != null">
+				DEP_ID,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=DECIMAL},
+			</if>
+			<if test="depId != null">
+				#{depId,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="loginCheck" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select USERNAME, PASSWORD, NAME,
+		PHONE, EMAIL, ROLE_ID,
+		DEP_ID, STATE
+		from userinfo
+		where username=#{param1,jdbcType=VARCHAR} and
+		password=#{param2,jdbcType=VARCHAR}
+	</select>
+
+	<select id="pwdCheck" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select USERNAME, PASSWORD, NAME,
+		PHONE, EMAIL, ROLE_ID,
+		DEP_ID, STATE
+		from userinfo
+		where username=#{param1,jdbcType=VARCHAR} and
+		password=#{param2,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="pwdfindCheck" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select USERNAME, PASSWORD, NAME,
+		PHONE, EMAIL, ROLE_ID,
+		DEP_ID, STATE
+		from userinfo
+		where username=#{param1,jdbcType=VARCHAR} and
+		name=#{param2,jdbcType=VARCHAR}
+	</select>
+
+	<select id="pwdChange" parameterType="java.util.Map" resultMap="BaseResultMap">
+		UPDATE USERINFO SET password = #{param2,jdbcType=VARCHAR}
+		WHERE username=#{param1,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getAllInfo_page" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select USERNAME, PASSWORD, NAME,
+		PHONE, EMAIL, ROLE_ID,
+		DEP_ID, STATE
+		from userinfo
+		where 1=1
+		<if test="user.username != null">
+			and username like #{username,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="getInfoByName" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select USERNAME, PASSWORD, NAME,
+		PHONE, EMAIL, ROLE_ID,
+		DEP_ID, STATE
+		from userinfo
+		where username=#{param1,jdbcType=VARCHAR}
+	</select>
+
+	<update id="updateUserMsgByName" parameterType="cn.ning3f1.cms.domain.Userinfo">
+		update USERINFO
+		<set>
+			<if test="password!=null">
+				PASSWORD=#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="name!=null">
+				NAME=#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="phone!=null">
+				PHONE=#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="email!=null">
+				EMAIL=#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="roleId!=null">
+				ROLE_ID=#{roleId,jdbcType=DECIMAL},
+			</if>
+			<if test="depId!=null">
+				DEP_ID=#{depId,jdbcType=VARCHAR},
+			</if>
+			<if test="state!=null">
+				STATE=#{state,jdbcType=CHAR}
+			</if>
+		</set>
+		WHERE 1=1 and USERNAME=#{username,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteUser" parameterType="java.lang.String" >
+    delete from USERINFO
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </delete>
+</mapper>

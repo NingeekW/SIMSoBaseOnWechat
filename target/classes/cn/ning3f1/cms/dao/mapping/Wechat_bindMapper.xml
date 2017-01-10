@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.cms.dao.Wechat_bindMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.cms.domain.Wechat_bind" >
+    <id column="stu_id" property="stuId" jdbcType="INTEGER" />
+    <id column="Wechat_UnionID" property="wechatUnionid" jdbcType="CHAR" />
+    <result column="stu_name" property="stuName" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stu_id, Wechat_UnionID, stu_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.ning3f1.cms.domain.Wechat_bindKey" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wechat_bind
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.ning3f1.cms.domain.Wechat_bindKey" >
+    delete from wechat_bind
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.cms.domain.Wechat_bind" >
+    insert into wechat_bind (stu_id, Wechat_UnionID, stu_name
+      )
+    values (#{stuId,jdbcType=INTEGER}, #{wechatUnionid,jdbcType=CHAR}, #{stuName,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.cms.domain.Wechat_bind" >
+    insert into wechat_bind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="wechatUnionid != null" >
+        Wechat_UnionID,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="wechatUnionid != null" >
+        #{wechatUnionid,jdbcType=CHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.cms.domain.Wechat_bind" >
+    update wechat_bind
+    <set >
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=CHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.cms.domain.Wechat_bind" >
+    update wechat_bind
+    set stu_name = #{stuName,jdbcType=CHAR}
+    where stu_id = #{stuId,jdbcType=INTEGER}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </update>
+</mapper>

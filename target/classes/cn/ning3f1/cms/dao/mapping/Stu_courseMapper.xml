@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.cms.dao.Stu_courseMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.cms.domain.Stu_course" >
+    <id column="course_id" property="courseId" jdbcType="INTEGER" />
+    <id column="stu_id" property="stuId" jdbcType="INTEGER" />
+    <result column="stu_grade" property="stuGrade" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    course_id, stu_id, stu_grade
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.ning3f1.cms.domain.Stu_courseKey" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_course
+    where course_id = #{courseId,jdbcType=INTEGER}
+      and stu_id = #{stuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.ning3f1.cms.domain.Stu_courseKey" >
+    delete from stu_course
+    where course_id = #{courseId,jdbcType=INTEGER}
+      and stu_id = #{stuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.cms.domain.Stu_course" >
+    insert into stu_course (course_id, stu_id, stu_grade
+      )
+    values (#{courseId,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{stuGrade,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.cms.domain.Stu_course" >
+    insert into stu_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="stuGrade != null" >
+        stu_grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="stuId != null" >
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="stuGrade != null" >
+        #{stuGrade,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.cms.domain.Stu_course" >
+    update stu_course
+    <set >
+      <if test="stuGrade != null" >
+        stu_grade = #{stuGrade,jdbcType=REAL},
+      </if>
+    </set>
+    where course_id = #{courseId,jdbcType=INTEGER}
+      and stu_id = #{stuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.cms.domain.Stu_course" >
+    update stu_course
+    set stu_grade = #{stuGrade,jdbcType=REAL}
+    where course_id = #{courseId,jdbcType=INTEGER}
+      and stu_id = #{stuId,jdbcType=INTEGER}
+  </update>
+</mapper>
