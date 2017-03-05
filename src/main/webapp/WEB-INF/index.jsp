@@ -25,7 +25,7 @@
   <div class="logo margin-big-left fadein-top">
    <h1><a href="Userinfo.htm" target="right" title="修改密码">
     <img src="images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />
-    </a>合同管理中心</h1>
+    </a>学生信息后台管理中心</h1>
   </div>
   <div class="head-l"><a class="button button-little bg-green" href="approve.htm" target="right"><span class="icon-home"></span> 待审批（5）</a> &nbsp;&nbsp;<a href="sign.htm" class="button button-little bg-blue" target="right">
   <span class="icon-wrench"></span> 待签订（10）</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="pay_type.htm" target="right"><span class="icon-power-off"></span> 收付款（20）</a>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.StuInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.StuInfo" >
+    <id column="stu_id" property="stuId" jdbcType="CHAR" />
+    <result column="stu_name" property="stuName" jdbcType="CHAR" />
+    <result column="stu_sex" property="stuSex" jdbcType="CHAR" />
+    <result column="stu_birth" property="stuBirth" jdbcType="TIMESTAMP" />
+    <result column="stu_nation" property="stuNation" jdbcType="CHAR" />
+    <result column="stu_Class_id" property="stuClassId" jdbcType="INTEGER" />
+    <result column="stu_Entrance_date" property="stuEntranceDate" jdbcType="TIMESTAMP" />
+    <result column="stu_home" property="stuHome" jdbcType="CHAR" />
+    <result column="stu_politic" property="stuPolitic" jdbcType="CHAR" />
+    <result column="ID_number" property="idNumber" jdbcType="CHAR" />
+    <result column="stu_Specialty" property="stuSpecialty" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stu_id, stu_name, stu_sex, stu_birth, stu_nation, stu_Class_id, stu_Entrance_date, 
+    stu_home, stu_politic, ID_number, stu_Specialty
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_info
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from stu_info
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.StuInfo" >
+    insert into stu_info (stu_id, stu_name, stu_sex, 
+      stu_birth, stu_nation, stu_Class_id, 
+      stu_Entrance_date, stu_home, stu_politic, 
+      ID_number, stu_Specialty)
+    values (#{stuId,jdbcType=CHAR}, #{stuName,jdbcType=CHAR}, #{stuSex,jdbcType=CHAR}, 
+      #{stuBirth,jdbcType=TIMESTAMP}, #{stuNation,jdbcType=CHAR}, #{stuClassId,jdbcType=INTEGER}, 
+      #{stuEntranceDate,jdbcType=TIMESTAMP}, #{stuHome,jdbcType=CHAR}, #{stuPolitic,jdbcType=CHAR}, 
+      #{idNumber,jdbcType=CHAR}, #{stuSpecialty,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.StuInfo" >
+    insert into stu_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="stuSex != null" >
+        stu_sex,
+      </if>
+      <if test="stuBirth != null" >
+        stu_birth,
+      </if>
+      <if test="stuNation != null" >
+        stu_nation,
+      </if>
+      <if test="stuClassId != null" >
+        stu_Class_id,
+      </if>
+      <if test="stuEntranceDate != null" >
+        stu_Entrance_date,
+      </if>
+      <if test="stuHome != null" >
+        stu_home,
+      </if>
+      <if test="stuPolitic != null" >
+        stu_politic,
+      </if>
+      <if test="idNumber != null" >
+        ID_number,
+      </if>
+      <if test="stuSpecialty != null" >
+        stu_Specialty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=CHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=CHAR},
+      </if>
+      <if test="stuSex != null" >
+        #{stuSex,jdbcType=CHAR},
+      </if>
+      <if test="stuBirth != null" >
+        #{stuBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuNation != null" >
+        #{stuNation,jdbcType=CHAR},
+      </if>
+      <if test="stuClassId != null" >
+        #{stuClassId,jdbcType=INTEGER},
+      </if>
+      <if test="stuEntranceDate != null" >
+        #{stuEntranceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuHome != null" >
+        #{stuHome,jdbcType=CHAR},
+      </if>
+      <if test="stuPolitic != null" >
+        #{stuPolitic,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=CHAR},
+      </if>
+      <if test="stuSpecialty != null" >
+        #{stuSpecialty,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.StuInfo" >
+    update stu_info
+    <set >
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=CHAR},
+      </if>
+      <if test="stuSex != null" >
+        stu_sex = #{stuSex,jdbcType=CHAR},
+      </if>
+      <if test="stuBirth != null" >
+        stu_birth = #{stuBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuNation != null" >
+        stu_nation = #{stuNation,jdbcType=CHAR},
+      </if>
+      <if test="stuClassId != null" >
+        stu_Class_id = #{stuClassId,jdbcType=INTEGER},
+      </if>
+      <if test="stuEntranceDate != null" >
+        stu_Entrance_date = #{stuEntranceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stuHome != null" >
+        stu_home = #{stuHome,jdbcType=CHAR},
+      </if>
+      <if test="stuPolitic != null" >
+        stu_politic = #{stuPolitic,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        ID_number = #{idNumber,jdbcType=CHAR},
+      </if>
+      <if test="stuSpecialty != null" >
+        stu_Specialty = #{stuSpecialty,jdbcType=CHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.StuInfo" >
+    update stu_info
+    set stu_name = #{stuName,jdbcType=CHAR},
+      stu_sex = #{stuSex,jdbcType=CHAR},
+      stu_birth = #{stuBirth,jdbcType=TIMESTAMP},
+      stu_nation = #{stuNation,jdbcType=CHAR},
+      stu_Class_id = #{stuClassId,jdbcType=INTEGER},
+      stu_Entrance_date = #{stuEntranceDate,jdbcType=TIMESTAMP},
+      stu_home = #{stuHome,jdbcType=CHAR},
+      stu_politic = #{stuPolitic,jdbcType=CHAR},
+      ID_number = #{idNumber,jdbcType=CHAR},
+      stu_Specialty = #{stuSpecialty,jdbcType=CHAR}
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </update>
+</mapper>

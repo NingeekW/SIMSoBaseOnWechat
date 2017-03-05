@@ -14,7 +14,7 @@
 	<!-- 通知spring自动扫描basePackage下的所有Mapper并注册 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName"  value="sqlSessionFactory"/>
-		<property name="basePackage" value="cn.ning3f1.cms.dao" />
+		<property name="basePackage" value="cn.ning3f1.wechat.dao" />
 	</bean>
 
 </beans>

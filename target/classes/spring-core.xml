@@ -16,7 +16,6 @@
 
 	<!-- 加载properties文件 -->	
 	<context:property-placeholder  location="classpath:jdbc.properties" order="1" />
-	
 	<!-- 配置数据库连接池 -->
 	<!-- 
 	<bean id="dataSource"
@@ -45,7 +44,7 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
-		<property name="mapperLocations" value="classpath:cn/ning3f1/cms/dao/mapping/*.xml" />
+		<property name="mapperLocations" value="classpath:cn/ning3f1/wechat/dao/mapping/*.xml" />
 	</bean>
 
 	<!-- 配置声明式事务切面 -->
@@ -75,7 +74,7 @@
 	<aop:config expose-proxy="true">
 	
 		<!-- 事务实施切入点,定义在service包和所有子包里的任意类的任意方法的执行：-->
-		<aop:pointcut id="txPointcut" expression="execution(* cn.ning3f1.cms.service..*.*(..))" />
+		<aop:pointcut id="txPointcut" expression="execution(* cn.ning3f1.wechat.service..*.*(..))" />
 		<!-- 织入切面通知 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 		<!-- 通过AOP切面实现读/写库选择 -->
@@ -87,7 +86,7 @@
 	</aop:config>
 
 	<!-- 扫描对应package，支持注解 -->
-	<context:component-scan base-package="cn.ning3f1.cms.service" />
+	<context:component-scan base-package="cn.ning3f1.wechat.service" />
 	<!-- 
 	<context:component-scan base-package="cn.ning3f1.gcts.access.*.action" />
 	 -->

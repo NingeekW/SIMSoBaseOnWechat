@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.WechatBindTeachAdminMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.WechatBindTeachAdmin" >
+    <id column="ta_id" property="taId" jdbcType="CHAR" />
+    <id column="Wechat_UnionID" property="wechatUnionid" jdbcType="CHAR" />
+    <result column="ta_name" property="taName" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ta_id, Wechat_UnionID, ta_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdminKey" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wechat_bind_teach_admin
+    where ta_id = #{taId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdminKey" >
+    delete from wechat_bind_teach_admin
+    where ta_id = #{taId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdmin" >
+    insert into wechat_bind_teach_admin (ta_id, Wechat_UnionID, ta_name
+      )
+    values (#{taId,jdbcType=CHAR}, #{wechatUnionid,jdbcType=CHAR}, #{taName,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdmin" >
+    insert into wechat_bind_teach_admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taId != null" >
+        ta_id,
+      </if>
+      <if test="wechatUnionid != null" >
+        Wechat_UnionID,
+      </if>
+      <if test="taName != null" >
+        ta_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taId != null" >
+        #{taId,jdbcType=CHAR},
+      </if>
+      <if test="wechatUnionid != null" >
+        #{wechatUnionid,jdbcType=CHAR},
+      </if>
+      <if test="taName != null" >
+        #{taName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdmin" >
+    update wechat_bind_teach_admin
+    <set >
+      <if test="taName != null" >
+        ta_name = #{taName,jdbcType=CHAR},
+      </if>
+    </set>
+    where ta_id = #{taId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdmin" >
+    update wechat_bind_teach_admin
+    set ta_name = #{taName,jdbcType=CHAR}
+    where ta_id = #{taId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </update>
+</mapper>

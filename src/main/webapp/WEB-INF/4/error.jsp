@@ -18,12 +18,12 @@ a{color:#0ae;}
 </head> 
 <body class="no-skin">
 <div class="error-container"> 
-    <h1> 合同管理系统-错误信息提示 </h1>   
+    <h1> 学生信息管理系统-错误信息提示 </h1>   
     <div class="errorcon">        
         <i class="icon-frown-o"></i>操作失败!	
     </div>
-    <h4 class="smaller">页面自动 <a id="href" href="<%=request.getHeader("Referer") %>">跳转到上一页</a> 等待时间： <b id="wait">10</b> </h4>
-    <h4> <a id="href" href="index.htm">转到首页</a> </h4>  
+    <h4 class="smaller">页面自动 <a id="href" href="index.htm">转到首页</a> 等待时间： <b id="wait">10</b> </h4>
+    <h4> <a id="href" href="<%=request.getHeader("Referer") %>">跳转到上一页</a> </h4>  
    
 </div>
 

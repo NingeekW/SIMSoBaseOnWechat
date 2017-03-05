@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.StuLoginMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.StuLogin" >
+    <id column="stu_id" property="stuId" jdbcType="CHAR" />
+    <result column="stu_name" property="stuName" jdbcType="CHAR" />
+    <result column="stu_password" property="stuPassword" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    stu_id, stu_name, stu_password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_login
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </select>
+  
+  <select id="stuLogin" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_login
+    where stu_id = #{param1, jdbcType=CHAR}
+    and stu_password = #{param2,jdbcType=CHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from stu_login
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.StuLogin" >
+    insert into stu_login (stu_id, stu_name, stu_password
+      )
+    values (#{stuId,jdbcType=CHAR}, #{stuName,jdbcType=CHAR}, #{stuPassword,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.StuLogin" >
+    insert into stu_login
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="stuPassword != null" >
+        stu_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuId != null" >
+        #{stuId,jdbcType=CHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=CHAR},
+      </if>
+      <if test="stuPassword != null" >
+        #{stuPassword,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.StuLogin" >
+    update stu_login
+    <set >
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=CHAR},
+      </if>
+      <if test="stuPassword != null" >
+        stu_password = #{stuPassword,jdbcType=CHAR},
+      </if>
+    </set>
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.StuLogin" >
+    update stu_login
+    set stu_name = #{stuName,jdbcType=CHAR},
+      stu_password = #{stuPassword,jdbcType=CHAR}
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </update>
+  
+  <update id="pwdChange" parameterType="java.util.Map" >
+		update stu_login 
+		set stu_password = #{param2,jdbcType=VARCHAR}
+		where stu_id=#{param1,jdbcType=VARCHAR}
+  </update>
+</mapper>

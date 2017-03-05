@@ -8,7 +8,7 @@
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta name="renderer" content="webkit">
-	<title>学生信息管理系统--登录</title>
+	<title>学生信息管理系统登录</title>
 	<link rel="stylesheet" href="css/pintuer.css">
 	<link rel="stylesheet" href="css/admin.css">
 	<script src="js/jquery.js"></script>
@@ -20,9 +20,9 @@
 				$(this).attr("src", "gercode?no-cache=" + Math.random());
 			});
 			
-			var error = "${error}";
-			if(error){
-				alert(error);
+			var info = "${info}";
+			if(info){
+				alert(info);
 			}
 		});
 		

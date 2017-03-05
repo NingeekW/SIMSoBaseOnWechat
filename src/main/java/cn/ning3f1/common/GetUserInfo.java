@@ -3,7 +3,7 @@ package cn.ning3f1.common;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import cn.ning3f1.cms.domain.Userinfo;
+import cn.ning3f1.wechat.domain.Userinfo;
 
 public final class GetUserInfo {
 	private String username;
@@ -43,13 +43,13 @@ public final class GetUserInfo {
 		return user.getEmail();		
 	}
 	
-	//得到用户手机�?
+	//得到用户手机�?
 	public static final String getPhone(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Userinfo user = (Userinfo) session.getAttribute("Userinfo");
 		return user.getPhone();		
 	}
-	//得到用户�?
+	//得到用户�?
 	public static final String getUsername(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		Userinfo user = (Userinfo) session.getAttribute("Userinfo");
