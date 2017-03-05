@@ -15,4 +15,12 @@ public interface WechatBindTeachAdminMapper {
     int updateByPrimaryKeySelective(WechatBindTeachAdmin record);
 
     int updateByPrimaryKey(WechatBindTeachAdmin record);
+
+	WechatBindTeachAdmin selectBind(String wechatUnionid);
+
+	int bind(String taId,  String taName,String openid);
+
+	int unbind(String wechatUnionid);
+
+	int unbindByTAid(String tAId);
 }

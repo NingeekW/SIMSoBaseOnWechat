@@ -5,10 +5,10 @@
     <id column="stu_id" property="stuId" jdbcType="CHAR" />
     <result column="stu_name" property="stuName" jdbcType="CHAR" />
     <result column="stu_sex" property="stuSex" jdbcType="CHAR" />
-    <result column="stu_birth" property="stuBirth" jdbcType="TIMESTAMP" />
+    <result column="stu_birth" property="stuBirth" jdbcType="DATE" />
     <result column="stu_nation" property="stuNation" jdbcType="CHAR" />
     <result column="stu_Class_id" property="stuClassId" jdbcType="INTEGER" />
-    <result column="stu_Entrance_date" property="stuEntranceDate" jdbcType="TIMESTAMP" />
+    <result column="stu_Entrance_date" property="stuEntranceDate" jdbcType="DATE" />
     <result column="stu_home" property="stuHome" jdbcType="CHAR" />
     <result column="stu_politic" property="stuPolitic" jdbcType="CHAR" />
     <result column="ID_number" property="idNumber" jdbcType="CHAR" />
@@ -24,6 +24,17 @@
     from stu_info
     where stu_id = #{stuId,jdbcType=CHAR}
   </select>
+    <select id="selectByStuName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_info
+    where stu_name like #{stuName,jdbcType=CHAR}
+  </select>
+  <select id="selectAllStuInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from stu_info
     where stu_id = #{stuId,jdbcType=CHAR}
@@ -34,8 +45,8 @@
       stu_Entrance_date, stu_home, stu_politic, 
       ID_number, stu_Specialty)
     values (#{stuId,jdbcType=CHAR}, #{stuName,jdbcType=CHAR}, #{stuSex,jdbcType=CHAR}, 
-      #{stuBirth,jdbcType=TIMESTAMP}, #{stuNation,jdbcType=CHAR}, #{stuClassId,jdbcType=INTEGER}, 
-      #{stuEntranceDate,jdbcType=TIMESTAMP}, #{stuHome,jdbcType=CHAR}, #{stuPolitic,jdbcType=CHAR}, 
+      #{stuBirth,jdbcType=DATE}, #{stuNation,jdbcType=CHAR}, #{stuClassId,jdbcType=INTEGER}, 
+      #{stuEntranceDate,jdbcType=DATE}, #{stuHome,jdbcType=CHAR}, #{stuPolitic,jdbcType=CHAR}, 
       #{idNumber,jdbcType=CHAR}, #{stuSpecialty,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.StuInfo" >
@@ -86,7 +97,7 @@
         #{stuSex,jdbcType=CHAR},
       </if>
       <if test="stuBirth != null" >
-        #{stuBirth,jdbcType=TIMESTAMP},
+        #{stuBirth,jdbcType=DATE},
       </if>
       <if test="stuNation != null" >
         #{stuNation,jdbcType=CHAR},
@@ -95,7 +106,7 @@
         #{stuClassId,jdbcType=INTEGER},
       </if>
       <if test="stuEntranceDate != null" >
-        #{stuEntranceDate,jdbcType=TIMESTAMP},
+        #{stuEntranceDate,jdbcType=DATE},
       </if>
       <if test="stuHome != null" >
         #{stuHome,jdbcType=CHAR},
@@ -121,7 +132,7 @@
         stu_sex = #{stuSex,jdbcType=CHAR},
       </if>
       <if test="stuBirth != null" >
-        stu_birth = #{stuBirth,jdbcType=TIMESTAMP},
+        stu_birth = #{stuBirth,jdbcType=DATE},
       </if>
       <if test="stuNation != null" >
         stu_nation = #{stuNation,jdbcType=CHAR},
@@ -130,7 +141,7 @@
         stu_Class_id = #{stuClassId,jdbcType=INTEGER},
       </if>
       <if test="stuEntranceDate != null" >
-        stu_Entrance_date = #{stuEntranceDate,jdbcType=TIMESTAMP},
+        stu_Entrance_date = #{stuEntranceDate,jdbcType=DATE},
       </if>
       <if test="stuHome != null" >
         stu_home = #{stuHome,jdbcType=CHAR},
@@ -151,10 +162,10 @@
     update stu_info
     set stu_name = #{stuName,jdbcType=CHAR},
       stu_sex = #{stuSex,jdbcType=CHAR},
-      stu_birth = #{stuBirth,jdbcType=TIMESTAMP},
+      stu_birth = #{stuBirth,jdbcType=DATE},
       stu_nation = #{stuNation,jdbcType=CHAR},
       stu_Class_id = #{stuClassId,jdbcType=INTEGER},
-      stu_Entrance_date = #{stuEntranceDate,jdbcType=TIMESTAMP},
+      stu_Entrance_date = #{stuEntranceDate,jdbcType=DATE},
       stu_home = #{stuHome,jdbcType=CHAR},
       stu_politic = #{stuPolitic,jdbcType=CHAR},
       ID_number = #{idNumber,jdbcType=CHAR},

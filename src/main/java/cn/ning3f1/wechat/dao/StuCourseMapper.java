@@ -22,4 +22,11 @@ public interface StuCourseMapper {
     int updateByPrimaryKeySelective(StuCourse record);
 
     int updateByPrimaryKey(StuCourse record);
+
+	StuCourse courseScore(String stuId, String courseId);
+	
+	List<StuCourse> courseAllScore(String stuId);
+
+	int deleteBystuId(String stuId);
+	
 }

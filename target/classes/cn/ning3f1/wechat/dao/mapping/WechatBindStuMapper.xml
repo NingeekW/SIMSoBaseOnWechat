@@ -34,7 +34,10 @@
     delete from wechat_bind_stu
     where Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
   </delete>
-  
+  <delete id="unbindByStuid" parameterType="java.util.Map" >
+    delete from wechat_bind_stu
+    where stu_id = #{stuId,jdbcType=CHAR}
+  </delete>  
   <insert id="insert" parameterType="cn.ning3f1.wechat.domain.WechatBindStu" >
     insert into wechat_bind_stu (stu_id, Wechat_UnionID, stu_name
       )

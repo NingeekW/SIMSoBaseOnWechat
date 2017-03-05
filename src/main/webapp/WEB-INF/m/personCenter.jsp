@@ -24,19 +24,12 @@
 			<div class="mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
-							<a href="query.html">我要查询</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="vote.html">我要投票</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="rate.html">我要评价</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="enroll.html">我要报名</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="payment.html">我要缴费</a>
-						</li>
-						<li class="mui-table-view-cell"><a href="personCenter.html">个人中心</a>
-						</li>
+						<li class="mui-table-view-cell"><a href="query.html">我要查询</a></li>
+						<li class="mui-table-view-cell"><a href="vote.html">成绩查询</a></li>
+						<li class="mui-table-view-cell"><a href="rate.html"></a></li>
+						<li class="mui-table-view-cell"><a href="enroll.html">我要报名</a></li>
+						<li class="mui-table-view-cell"><a href="payment.html">我要缴费</a></li>
+						<li class="mui-table-view-cell"><a href="personCenter.htm">个人中心</a></li>
 					</ul>
 				</div>
 			</div>

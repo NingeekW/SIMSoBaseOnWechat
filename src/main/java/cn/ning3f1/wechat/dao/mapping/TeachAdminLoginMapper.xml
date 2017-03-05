@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.TeachAdminLogin" >
     <id column="ta_id" property="taId" jdbcType="CHAR" />
     <result column="ta_name" property="taName" jdbcType="CHAR" />
-    <result column="stu_password" property="stuPassword" jdbcType="CHAR" />
+    <result column="ta_password" property="taPassword" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ta_id, ta_name, stu_password
+    ta_id, ta_name, ta_password
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 'true' as QUERYID,
@@ -15,14 +15,23 @@
     from teach_admin_login
     where ta_id = #{taId,jdbcType=CHAR}
   </select>
+  
+  <select id="loginCheck" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from teach_admin_login
+    where ta_id = #{param1, jdbcType=CHAR}
+    and ta_password = #{param2,jdbcType=CHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from teach_admin_login
     where ta_id = #{taId,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="cn.ning3f1.wechat.domain.TeachAdminLogin" >
-    insert into teach_admin_login (ta_id, ta_name, stu_password
+    insert into teach_admin_login (ta_id, ta_name, ta_password
       )
-    values (#{taId,jdbcType=CHAR}, #{taName,jdbcType=CHAR}, #{stuPassword,jdbcType=CHAR}
+    values (#{taId,jdbcType=CHAR}, #{taName,jdbcType=CHAR}, #{taPassword,jdbcType=CHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.TeachAdminLogin" >
@@ -34,8 +43,8 @@
       <if test="taName != null" >
         ta_name,
       </if>
-      <if test="stuPassword != null" >
-        stu_password,
+      <if test="taPassword != null" >
+        ta_password,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -45,8 +54,8 @@
       <if test="taName != null" >
         #{taName,jdbcType=CHAR},
       </if>
-      <if test="stuPassword != null" >
-        #{stuPassword,jdbcType=CHAR},
+      <if test="taPassword != null" >
+        #{taPassword,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -56,8 +65,8 @@
       <if test="taName != null" >
         ta_name = #{taName,jdbcType=CHAR},
       </if>
-      <if test="stuPassword != null" >
-        stu_password = #{stuPassword,jdbcType=CHAR},
+      <if test="taPassword != null" >
+        ta_password = #{taPassword,jdbcType=CHAR},
       </if>
     </set>
     where ta_id = #{taId,jdbcType=CHAR}
@@ -65,7 +74,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.TeachAdminLogin" >
     update teach_admin_login
     set ta_name = #{taName,jdbcType=CHAR},
-      stu_password = #{stuPassword,jdbcType=CHAR}
+      ta_password = #{taPassword,jdbcType=CHAR}
     where ta_id = #{taId,jdbcType=CHAR}
   </update>
 </mapper>

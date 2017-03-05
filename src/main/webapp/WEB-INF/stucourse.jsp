@@ -14,7 +14,7 @@
 		<script src="js/jquery.js"></script>
 		<script src="js/pintuer.js"></script>
 	 
-	</head>
+</head>
 
 	<body>
 

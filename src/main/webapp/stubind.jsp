@@ -32,7 +32,7 @@
 				<div style="height: 120px;">
 				</div>
 				<div class="media media-y margin-big-bottom"></div>
-				<form action="dobind.htm" method="post">
+				<form action="dostubind.htm" method="post">
 					<div class="panel loginbox">
 						<div class="text-center margin-big padding-big-top">
 							<h1>学生信息管理系统</h1>

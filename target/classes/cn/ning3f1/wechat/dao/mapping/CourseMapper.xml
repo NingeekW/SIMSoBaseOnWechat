@@ -15,7 +15,22 @@
     from course
     where course_id = #{courseId,jdbcType=CHAR}
   </select>
-  <select id="getAllInfo_page" resultMap="BaseResultMap">
+  
+  <select id="selectCourse" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from course
+    where course_name = #{courseName,jdbcType=CHAR}
+  </select>
+  
+  <select id="courseByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from course
+    where course_name like #{courseName,jdbcType=CHAR}
+  </select>
+  
+  <select id="courseAllInfo" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
     from course

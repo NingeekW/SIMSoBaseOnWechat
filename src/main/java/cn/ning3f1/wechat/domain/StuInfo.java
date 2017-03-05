@@ -1,7 +1,5 @@
 package cn.ning3f1.wechat.domain;
 
-import java.util.Date;
-
 public class StuInfo {
     private String stuId;
 
@@ -9,13 +7,13 @@ public class StuInfo {
 
     private String stuSex;
 
-    private Date stuBirth;
+    private String stuBirth;
 
     private String stuNation;
 
     private Integer stuClassId;
 
-    private Date stuEntranceDate;
+    private String stuEntranceDate;
 
     private String stuHome;
 
@@ -49,11 +47,11 @@ public class StuInfo {
         this.stuSex = stuSex == null ? null : stuSex.trim();
     }
 
-    public Date getStuBirth() {
+    public String getStuBirth() {
         return stuBirth;
     }
 
-    public void setStuBirth(Date stuBirth) {
+    public void setStuBirth(String stuBirth) {
         this.stuBirth = stuBirth;
     }
 
@@ -73,11 +71,11 @@ public class StuInfo {
         this.stuClassId = stuClassId;
     }
 
-    public Date getStuEntranceDate() {
+    public String getStuEntranceDate() {
         return stuEntranceDate;
     }
 
-    public void setStuEntranceDate(Date stuEntranceDate) {
+    public void setStuEntranceDate(String stuEntranceDate) {
         this.stuEntranceDate = stuEntranceDate;
     }
 

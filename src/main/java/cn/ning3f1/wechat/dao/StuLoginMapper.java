@@ -18,4 +18,6 @@ public interface StuLoginMapper {
     int updateByPrimaryKeySelective(StuLogin record);
 
     int updateByPrimaryKey(StuLogin record);
+
+	int insertStu(String stuId, String stuName);
 }

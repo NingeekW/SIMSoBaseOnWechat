@@ -1,4 +1,4 @@
-package cn.ning3f1.wechat.message.resq;
+package cn.ning3f1.wechat.message.resp;
 
 /**
  * ClassName:Image.java

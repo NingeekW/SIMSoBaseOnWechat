@@ -38,4 +38,10 @@ public class PwdServiceImpl implements PwdService {
 		return userinofMapper.pwdfindCheck(username, name);
 	}
 
+	@Override
+	public StuLogin TApwdCheck(String taId, String opassword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

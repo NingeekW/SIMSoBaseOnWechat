@@ -16,6 +16,29 @@
     where ta_id = #{taId,jdbcType=CHAR}
       and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
   </select>
+  
+  
+  <select id="selectBind" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wechat_bind_teach_admin
+    where Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </select>
+   <insert id="bind" parameterType="java.util.Map" >
+    insert into wechat_bind_teach_admin (ta_id, ta_name,Wechat_UnionID
+      )
+    values (#{param1,jdbcType=CHAR}, #{param2,jdbcType=CHAR}, #{param3,jdbcType=CHAR}
+      )
+  </insert>
+  <delete id="unbind" parameterType="java.util.Map" >
+    delete from wechat_bind_teach_admin
+    where Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </delete>
+
+    <delete id="unbindByTAid" parameterType="java.util.Map" >
+    delete from wechat_bind_teach_admin
+    where ta_id = #{taId,jdbcType=CHAR}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.WechatBindTeachAdminKey" >
     delete from wechat_bind_teach_admin
     where ta_id = #{taId,jdbcType=CHAR}

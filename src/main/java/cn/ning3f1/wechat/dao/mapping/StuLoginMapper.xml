@@ -34,6 +34,11 @@
     values (#{stuId,jdbcType=CHAR}, #{stuName,jdbcType=CHAR}, #{stuPassword,jdbcType=CHAR}
       )
   </insert>
+  <insert id="insertStu" parameterType="java.lang.String" >
+    insert into stu_login (stu_id, stu_name
+      )
+    values (#{param1,jdbcType=CHAR}, #{param2,jdbcType=CHAR} )
+  </insert>
   <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.StuLogin" >
     insert into stu_login
     <trim prefix="(" suffix=")" suffixOverrides="," >

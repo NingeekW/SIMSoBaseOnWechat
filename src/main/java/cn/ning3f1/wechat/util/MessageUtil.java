@@ -18,13 +18,13 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 
-import cn.ning3f1.wechat.message.req.ImageMessage;
-import cn.ning3f1.wechat.message.req.TextMessage;
-import cn.ning3f1.wechat.message.req.VideoMessage;
-import cn.ning3f1.wechat.message.req.VoiceMessage;
-import cn.ning3f1.wechat.message.resq.Article;
-import cn.ning3f1.wechat.message.resq.MusicMessage;
-import cn.ning3f1.wechat.message.resq.NewsMessage;
+import cn.ning3f1.wechat.message.resp.Article;
+import cn.ning3f1.wechat.message.resp.ImageMessage;
+import cn.ning3f1.wechat.message.resp.MusicMessage;
+import cn.ning3f1.wechat.message.resp.NewsMessage;
+import cn.ning3f1.wechat.message.resp.TextMessage;
+import cn.ning3f1.wechat.message.resp.VideoMessage;
+import cn.ning3f1.wechat.message.resp.VoiceMessage;
 
 /**
  * ClassName:MessageUtil.java

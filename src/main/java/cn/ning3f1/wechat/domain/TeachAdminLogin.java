@@ -5,7 +5,7 @@ public class TeachAdminLogin {
 
     private String taName;
 
-    private String stuPassword;
+    private String taPassword;
 
     public String getTaId() {
         return taId;
@@ -23,11 +23,11 @@ public class TeachAdminLogin {
         this.taName = taName == null ? null : taName.trim();
     }
 
-    public String getStuPassword() {
-        return stuPassword;
+    public String getTaPassword() {
+        return taPassword;
     }
 
-    public void setStuPassword(String stuPassword) {
-        this.stuPassword = stuPassword == null ? null : stuPassword.trim();
+    public void setTaPassword(String taPassword) {
+        this.taPassword = taPassword == null ? null : taPassword.trim();
     }
 }

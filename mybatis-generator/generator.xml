@@ -44,37 +44,7 @@
 		</javaClientGenerator>
 
 		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 -->
-		<table tableName="stu_login" domainObjectName="StuLogin"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">
-		</table>
-		<table tableName="wechat_bind_stu" domainObjectName="WechatBindStu"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">
-		</table>
-		<table tableName="teach_admin_login" domainObjectName="TeachAdminLogin"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">
-		</table>
-		<table tableName="wechat_bind_teach_admin" domainObjectName="WechatBindTeachAdmin"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">
-		</table>
-		<table tableName="stu_info" domainObjectName="StuInfo"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">
-		</table>
-		<table tableName="course" domainObjectName="Course"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">
-		</table>
-		<table tableName="stu_course" domainObjectName="StuCourse"
+		<table tableName="ta_info" domainObjectName="TAInfo"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" selectByPrimaryKeyQueryId="true">

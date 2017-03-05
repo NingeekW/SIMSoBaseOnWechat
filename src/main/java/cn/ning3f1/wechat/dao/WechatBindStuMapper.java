@@ -22,4 +22,6 @@ public interface WechatBindStuMapper {
 
     int updateByPrimaryKey(WechatBindStu record);
 
+	int unbindByStuid(String stuId);
+
 }

@@ -3,8 +3,9 @@ package cn.ning3f1.wechat.Dispatcher;
 import java.util.Date;
 import java.util.Map;
 
-import cn.ning3f1.wechat.message.req.TextMessage;
+import cn.ning3f1.wechat.message.resp.TextMessage;
 import cn.ning3f1.wechat.util.MessageUtil;
+import cn.ning3f1.wechat.Dispatcher.MsgDispatcher;
 
 /**
  * ClassName: EventDispatcher.java
@@ -15,12 +16,14 @@ import cn.ning3f1.wechat.util.MessageUtil;
  *
  */
 public class EventDispatcher {
+
     public static String processEvent(Map<String, String> map) {
     	String openid=map.get("FromUserName"); //用户openid
     	String mpid=map.get("ToUserName");   //公众号原始ID
         if (map.get("Event").equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) { //关注事件
             System.out.println("==============这是关注事件！");
           //普通文本消息
+            /*
         	TextMessage txtmsg=new TextMessage();
         	txtmsg.setToUserName(openid);
         	txtmsg.setFromUserName(mpid);
@@ -28,6 +31,11 @@ public class EventDispatcher {
         	txtmsg.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
             txtmsg.setContent("你好，欢迎关注学生信息管理系统！");
             return MessageUtil.textMessageToXml(txtmsg);
+            */
+            /**
+             * 返回学生信息管理系统使用相关操作的信息
+             */
+            return MsgDispatcher.commonMessage(openid, mpid);
         }
          
         if (map.get("Event").equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) { //取消关注事件

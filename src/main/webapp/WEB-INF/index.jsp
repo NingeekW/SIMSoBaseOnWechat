@@ -23,7 +23,7 @@
 <body style="background-color:#f2f9fd;">
 <div class="header bg-main">
   <div class="logo margin-big-left fadein-top">
-   <h1><a href="Userinfo.htm" target="right" title="修改密码">
+   <h1><a href="personCenter.htm" target="right" title="修改密码">
     <img src="images/y.jpg" class="radius-circle rotate-hover" height="50" alt="" />
     </a>学生信息后台管理中心</h1>
   </div>
@@ -36,10 +36,12 @@
   <h2><span class="icon-user"></span>基本设置</h2>
   <ul style="display:block">
     <li id="ManageUser"><a href="ManageUser.htm" target="right" ><span class="icon-caret-right"></span>用户管理</a></li>
-    <li><a href="pass.html" target="right"><span class="icon-caret-right"></span>日志管理</a></li>
+    <li><a href="stulist.htm" target="right"><span class="icon-caret-right"></span>学生信息管理</a></li>
     <li id="RoleManage"><a href="RoleManage.htm" target="right"><span class="icon-caret-right"></span>角色管理</a></li>   
     <li><a href="Dictshowall.htm" target="right"><span class="icon-caret-right"></span>数据字典</a></li>   
     <li><a href="enlist.htm" target="right"><span class="icon-caret-right"></span>企业信息</a></li>
+    <li><a href="courselist.htm" target="right"><span class="icon-caret-right"></span>课程信息</a></li>
+    
     <li><a href="DepartDatas.htm" target="right"><span class="icon-caret-right"></span>组织机构</a></li>     
     <li><a href="changepwd.htm" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
   </ul>   

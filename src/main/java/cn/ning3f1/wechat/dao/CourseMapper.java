@@ -14,8 +14,13 @@ public interface CourseMapper {
     int insertSelective(Course record);
 
     Course selectByPrimaryKey(String courseId);
+    
+    Course selectCourse(String courseName);
+    
   //得到学生的所有课程信息
-    List<Course> getAllInfo_page(Map<String,Object> map);
+    List<Course> courseAllInfo();
+    //通过名字模糊查询
+    List<Course> courseByName(String courseName);
     
     int updateByPrimaryKeySelective(Course record);
 

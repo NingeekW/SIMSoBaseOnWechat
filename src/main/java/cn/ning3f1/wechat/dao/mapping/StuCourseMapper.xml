@@ -4,6 +4,8 @@
   <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.StuCourse" >
     <id column="course_id" property="courseId" jdbcType="CHAR" />
     <id column="stu_id" property="stuId" jdbcType="CHAR" />
+    <result column="course_name" property="courseName" jdbcType="CHAR" />
+    <result column="credit" property="credit" jdbcType="CHAR" />
     <result column="stu_grade" property="stuGrade" jdbcType="REAL" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -17,6 +19,22 @@
       and stu_id = #{stuId,jdbcType=CHAR}
   </select>
   
+ <select id="courseScore" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_course
+    where course_id = #{1,jdbcType=CHAR}
+      and stu_id = #{0,jdbcType=CHAR}
+  </select>
+  
+  <select id="courseAllScore" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select c.course_name,c.credit
+    <include refid="Base_Column_List" />
+    from stu_course stu,course c
+    where stu.course_id = c.course_id
+      and stu_id = #{0,jdbcType=CHAR}
+  </select>
+  
   <select id="getAllInfo_page" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
@@ -28,6 +46,12 @@
     where course_id = #{courseId,jdbcType=CHAR}
       and stu_id = #{stuId,jdbcType=CHAR}
   </delete>
+  
+  <delete id="deleteBystuId" parameterType="java.lang.String" >
+    delete from stu_course
+    where  stu_id = #{stuId,jdbcType=CHAR}
+  </delete>
+  
   <insert id="insert" parameterType="cn.ning3f1.wechat.domain.StuCourse" >
     insert into stu_course (course_id, stu_id, stu_grade
       )

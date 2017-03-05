@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.TAInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.TAInfo" >
+    <id column="ta_id" property="taId" jdbcType="CHAR" />
+    <result column="ta_name" property="taName" jdbcType="CHAR" />
+    <result column="ta_sex" property="taSex" jdbcType="CHAR" />
+    <result column="ta_birth" property="taBirth" jdbcType="DATE" />
+    <result column="ta_nation" property="taNation" jdbcType="CHAR" />
+    <result column="ta_Class_id" property="taClassId" jdbcType="INTEGER" />
+    <result column="ta_Entrance_date" property="taEntranceDate" jdbcType="DATE" />
+    <result column="ta_home" property="taHome" jdbcType="CHAR" />
+    <result column="ta_politic" property="taPolitic" jdbcType="CHAR" />
+    <result column="ID_number" property="idNumber" jdbcType="CHAR" />
+    <result column="ta_Specialty" property="taSpecialty" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ta_id, ta_name, ta_sex, ta_birth, ta_nation, ta_Class_id, ta_Entrance_date, ta_home, 
+    ta_politic, ID_number, ta_Specialty
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ta_info
+    where ta_id = #{taId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ta_info
+    where ta_id = #{taId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.TAInfo" >
+    insert into ta_info (ta_id, ta_name, ta_sex, ta_birth, 
+      ta_nation, ta_Class_id, ta_Entrance_date, 
+      ta_home, ta_politic, ID_number, 
+      ta_Specialty)
+    values (#{taId,jdbcType=CHAR}, #{taName,jdbcType=CHAR}, #{taSex,jdbcType=CHAR}, #{taBirth,jdbcType=DATE}, 
+      #{taNation,jdbcType=CHAR}, #{taClassId,jdbcType=INTEGER}, #{taEntranceDate,jdbcType=DATE}, 
+      #{taHome,jdbcType=CHAR}, #{taPolitic,jdbcType=CHAR}, #{idNumber,jdbcType=CHAR}, 
+      #{taSpecialty,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.TAInfo" >
+    insert into ta_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taId != null" >
+        ta_id,
+      </if>
+      <if test="taName != null" >
+        ta_name,
+      </if>
+      <if test="taSex != null" >
+        ta_sex,
+      </if>
+      <if test="taBirth != null" >
+        ta_birth,
+      </if>
+      <if test="taNation != null" >
+        ta_nation,
+      </if>
+      <if test="taClassId != null" >
+        ta_Class_id,
+      </if>
+      <if test="taEntranceDate != null" >
+        ta_Entrance_date,
+      </if>
+      <if test="taHome != null" >
+        ta_home,
+      </if>
+      <if test="taPolitic != null" >
+        ta_politic,
+      </if>
+      <if test="idNumber != null" >
+        ID_number,
+      </if>
+      <if test="taSpecialty != null" >
+        ta_Specialty,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taId != null" >
+        #{taId,jdbcType=CHAR},
+      </if>
+      <if test="taName != null" >
+        #{taName,jdbcType=CHAR},
+      </if>
+      <if test="taSex != null" >
+        #{taSex,jdbcType=CHAR},
+      </if>
+      <if test="taBirth != null" >
+        #{taBirth,jdbcType=DATE},
+      </if>
+      <if test="taNation != null" >
+        #{taNation,jdbcType=CHAR},
+      </if>
+      <if test="taClassId != null" >
+        #{taClassId,jdbcType=INTEGER},
+      </if>
+      <if test="taEntranceDate != null" >
+        #{taEntranceDate,jdbcType=DATE},
+      </if>
+      <if test="taHome != null" >
+        #{taHome,jdbcType=CHAR},
+      </if>
+      <if test="taPolitic != null" >
+        #{taPolitic,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=CHAR},
+      </if>
+      <if test="taSpecialty != null" >
+        #{taSpecialty,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.TAInfo" >
+    update ta_info
+    <set >
+      <if test="taName != null" >
+        ta_name = #{taName,jdbcType=CHAR},
+      </if>
+      <if test="taSex != null" >
+        ta_sex = #{taSex,jdbcType=CHAR},
+      </if>
+      <if test="taBirth != null" >
+        ta_birth = #{taBirth,jdbcType=DATE},
+      </if>
+      <if test="taNation != null" >
+        ta_nation = #{taNation,jdbcType=CHAR},
+      </if>
+      <if test="taClassId != null" >
+        ta_Class_id = #{taClassId,jdbcType=INTEGER},
+      </if>
+      <if test="taEntranceDate != null" >
+        ta_Entrance_date = #{taEntranceDate,jdbcType=DATE},
+      </if>
+      <if test="taHome != null" >
+        ta_home = #{taHome,jdbcType=CHAR},
+      </if>
+      <if test="taPolitic != null" >
+        ta_politic = #{taPolitic,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        ID_number = #{idNumber,jdbcType=CHAR},
+      </if>
+      <if test="taSpecialty != null" >
+        ta_Specialty = #{taSpecialty,jdbcType=CHAR},
+      </if>
+    </set>
+    where ta_id = #{taId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.TAInfo" >
+    update ta_info
+    set ta_name = #{taName,jdbcType=CHAR},
+      ta_sex = #{taSex,jdbcType=CHAR},
+      ta_birth = #{taBirth,jdbcType=DATE},
+      ta_nation = #{taNation,jdbcType=CHAR},
+      ta_Class_id = #{taClassId,jdbcType=INTEGER},
+      ta_Entrance_date = #{taEntranceDate,jdbcType=DATE},
+      ta_home = #{taHome,jdbcType=CHAR},
+      ta_politic = #{taPolitic,jdbcType=CHAR},
+      ID_number = #{idNumber,jdbcType=CHAR},
+      ta_Specialty = #{taSpecialty,jdbcType=CHAR}
+    where ta_id = #{taId,jdbcType=CHAR}
+  </update>
+</mapper>

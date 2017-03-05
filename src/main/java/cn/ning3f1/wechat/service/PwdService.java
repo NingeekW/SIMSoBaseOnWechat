@@ -4,7 +4,8 @@ import cn.ning3f1.wechat.domain.StuLogin;
 import cn.ning3f1.wechat.domain.Userinfo;
 
 public interface PwdService {
-	StuLogin pwdCheck(String stuId,String opassword);
-	Userinfo pwdfindCheck(String stuId,String password);
-	boolean pwdChange(String stuId, String npassword);
+	public StuLogin pwdCheck(String stuId,String opassword);
+	public StuLogin TApwdCheck(String taId,String opassword);
+	public Userinfo pwdfindCheck(String stuId,String password);
+	public boolean pwdChange(String stuId, String npassword);
 }
