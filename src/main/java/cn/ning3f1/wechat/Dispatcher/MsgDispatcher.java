@@ -108,7 +108,7 @@ public class MsgDispatcher {
 					courseScore += stuCourse2.getCourseName()+"成绩为"+stuCourse2.getStuGrade()+"分\n";
         	}else{
         		failNum += 1;
-        		courseScore += "<a color=#FF0000>"+stuCourse2.getCourseName()+"成绩为"+stuCourse2.getStuGrade()+"分</a>\n";
+        		courseScore += "<a style"+"color=#FF0000>"+stuCourse2.getCourseName()+"成绩为"+stuCourse2.getStuGrade()+"分</a>\n";
         	}
 		}
 		if(failNum > 0){

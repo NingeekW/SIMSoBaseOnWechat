@@ -38,14 +38,14 @@ public class Enterpresstcontroller {
 		
 		model.put("enInfos", list);
 		model.put("pages", page);
-		return Keys.PREFIX+"4/enlist.jsp";	
+		return Keys.PREFIX+"enlist.jsp";	
 	}
 	
 	
 	//请求到增加企业信息界面
 	@RequestMapping("addenifo.htm")
 	public String addenifo(){
-		return Keys.PREFIX+"4/adden.jsp";	
+		return Keys.PREFIX+"adden.jsp";	
 	}
 	
 	//请求到企业信息详情页面
@@ -55,7 +55,7 @@ public class Enterpresstcontroller {
 		EnterpressInfo eninfo= service.selectEnterpress(Integer.parseInt(id));
 		map.put("eninfo", eninfo);
 		
-		return Keys.PREFIX+"4/enp.jsp";	
+		return Keys.PREFIX+"enp.jsp";	
 	}
 	
 	//添加企业信息到数据库
@@ -94,7 +94,7 @@ public class Enterpresstcontroller {
 		List<EnterpressInfo> list=service.selectEnterpressByName(map);
 		model.put("enInfos", list);
 		model.put("pages", page);
-		return Keys.PREFIX+"4/enlist.jsp";	
+		return Keys.PREFIX+"enlist.jsp";	
 	}
 
 }

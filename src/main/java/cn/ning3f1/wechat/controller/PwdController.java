@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.ning3f1.common.Keys;
 import cn.ning3f1.wechat.domain.StuInfo;
 import cn.ning3f1.wechat.domain.StuLogin;
+import cn.ning3f1.wechat.domain.TAInfo;
+import cn.ning3f1.wechat.domain.TeachAdminLogin;
 import cn.ning3f1.wechat.domain.Userinfo;
+import cn.ning3f1.wechat.service.LoginService;
 import cn.ning3f1.wechat.service.PwdService;
 
 //密码验证
@@ -20,35 +23,52 @@ public class PwdController {
 	
 	@Resource
 	private PwdService pwdService;
+	@Resource
+	private LoginService loginService;
 	
 	@RequestMapping("changepwd.htm")
 	public String changepwd(){
-		return Keys.PREFIX+"4/ChangePass.jsp";	
+		return Keys.PREFIX+"ChangePass.jsp";	
 	}
 	
 	@RequestMapping("dochangepwd.htm")
 	public String changepwd(HttpServletRequest request,ModelMap model){
 		HttpSession session = request.getSession();
 		StuInfo stuInfo = (StuInfo) session.getAttribute("stuInfo");
-		StuLogin user = null;
-		user = pwdService.pwdCheck(stuInfo.getStuId(),request.getParameter("mpass"));
-		if(user != null){
-			if(request.getParameter("newpass").equals("null")){
-				model.put("error", "密码不可用");
-				return Keys.PREFIX+"4/ChangePass.jsp";	
+		TAInfo taInfo = (TAInfo) session.getAttribute("TAInfo");	
+		if(stuInfo != null){
+			StuLogin user = null;
+			user = pwdService.pwdCheck(stuInfo.getStuId(),request.getParameter("mpass"));
+			if(user != null){
+				if(request.getParameter("newpass").equals("null")){
+					model.put("error", "密码不可用");
+					return Keys.PREFIX+"ChangePass.jsp";	
+				}
+				pwdService.stupwdChange(stuInfo.getStuId(),request.getParameter("newpass"));
+				return Keys.PREFIX+"tips.jsp";	
 			}
-			pwdService.pwdChange(stuInfo.getStuId(),request.getParameter("newpass"));
-			return Keys.PREFIX+"4/tips.jsp";	
+		}else if(taInfo != null){
+			TeachAdminLogin user = null;
+			user = loginService.TALogin(taInfo.getTaId(), request.getParameter("mpass"));
+			if(user != null){
+				if(request.getParameter("newpass").equals("null")){
+					model.put("error", "密码不可用");
+					return Keys.PREFIX+"ChangePass.jsp";	
+				}
+				pwdService.tapwdChange(taInfo.getTaId(),request.getParameter("newpass"));
+				return Keys.PREFIX+"tips.jsp";	
+			}
 		}
+		
 		//System.out.println("密码错误");
 		model.put("error", "原密码错误!!!");
-		return Keys.PREFIX+"4/ChangePass.jsp";	
+		return Keys.PREFIX+"ChangePass.jsp";	
 	}
 	
 	//跳转到修改密码页面
 	@RequestMapping("findpass.htm")
 	public String findpass(){
-		return Keys.PREFIX+"4/FindPasswd.jsp";	
+		return Keys.PREFIX+"FindPasswd.jsp";	
 	}
 	
 	//对用户信息进行校验是否为管理系统的用户
@@ -61,11 +81,11 @@ public class PwdController {
 		if(user != null){
 			user.setAllNull();
 			session.setAttribute("Userinfo", user);
-			return Keys.PREFIX+"4/FindChangePass.jsp";	
+			return Keys.PREFIX+"FindChangePass.jsp";	
 		}
 
 		model.put("error", "该账号不存在！！！");
-		return Keys.PREFIX+"4/FindPasswd.jsp";	
+		return Keys.PREFIX+"FindPasswd.jsp";	
 	}
 	
 	//校验通过进行密码修改操作
@@ -75,9 +95,9 @@ public class PwdController {
 		Userinfo user = (Userinfo) session.getAttribute("Userinfo");
 		if(request.getParameter("newpass").equals("null")){
 			model.put("error", "密码不可用");
-			return Keys.PREFIX+"4/FindChangePass.jsp";	
+			return Keys.PREFIX+"FindChangePass.jsp";	
 		}
-		pwdService.pwdChange(user.getUsername(), request.getParameter("newpass"));
+		pwdService.stupwdChange(user.getUsername(), request.getParameter("newpass"));
 		model.put("error", "密码找回成功，请登录！");	
 		return "login.htm";	
 	}

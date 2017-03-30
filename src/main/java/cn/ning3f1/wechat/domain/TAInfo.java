@@ -11,7 +11,7 @@ public class TAInfo {
 
     private String taNation;
 
-    private Integer taClassId;
+    private String taClassId;
 
     private String taEntranceDate;
 
@@ -22,6 +22,12 @@ public class TAInfo {
     private String idNumber;
 
     private String taSpecialty;
+    
+    private String taSpecialtyName;
+
+    private String admin;
+    
+    private String adminName;
 
     public String getTaId() {
         return taId;
@@ -63,12 +69,12 @@ public class TAInfo {
         this.taNation = taNation == null ? null : taNation.trim();
     }
 
-    public Integer getTaClassId() {
+    public String getTaClassId() {
         return taClassId;
     }
 
-    public void setTaClassId(Integer taClassId) {
-        this.taClassId = taClassId;
+    public void setTaClassId(String taClassId) {
+        this.taClassId = taClassId == null ? null : taClassId.trim();
     }
 
     public String getTaEntranceDate() {
@@ -110,4 +116,28 @@ public class TAInfo {
     public void setTaSpecialty(String taSpecialty) {
         this.taSpecialty = taSpecialty == null ? null : taSpecialty.trim();
     }
+    
+    public String getTaSpecialtyName() {
+        return taSpecialtyName;
+    }
+
+    public void setTaSpecialtyName(String taSpecialtyName) {
+        this.taSpecialtyName = taSpecialtyName == null ? null : taSpecialtyName.trim();
+    }
+
+    public String getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin == null ? null : admin.trim();
+    }
+
+	public String getAdminName() {
+		return adminName;
+	}
+
+	public void setAdminName(String adminName) {
+		this.adminName = adminName;
+	}
 }

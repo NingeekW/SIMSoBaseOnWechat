@@ -19,6 +19,7 @@ import cn.ning3f1.wechat.domain.TeachAdminLogin;
 import cn.ning3f1.wechat.domain.Userinfo;
 import cn.ning3f1.wechat.domain.WechatBindStu;
 import cn.ning3f1.wechat.domain.WechatBindTeachAdmin;
+import cn.ning3f1.wechat.service.InfoService;
 import cn.ning3f1.wechat.service.LoginService;
 import cn.ning3f1.wechat.service.StuCourseService;
 
@@ -28,7 +29,8 @@ public class LoginController {
 
 	@Resource
 	private LoginService loginService;
-
+	@Resource
+	private InfoService infoService;
 
 	public LoginController(LoginService loginService) {
 		super();
@@ -49,14 +51,14 @@ public class LoginController {
 		System.out.println("demo");
 		String sessionVercode = (String) session.getAttribute(VerifyCodeServlet.VERIFYCODE_KEY);
 		if( sessionVercode !=null && !sessionVercode.equalsIgnoreCase(vercode)){
-			model.put("error","验证码错误！");
+			model.put("info","验证码错误");
 			return "login.jsp";
 		}
 		//chekc username and password
 		//Userinfo stuUser = loginService.userLogin(username, password);
 		StuLogin stuUser = loginService.stuLogin(username, password);
 		if(stuUser != null){
-			StuInfo stuInfo = loginService.stuInfo(stuUser.getStuId());
+			StuInfo stuInfo = infoService.selectStuInfo(stuUser.getStuId());
 			if(stuInfo == null){
 				model.put("error","用户信息查询出错，请重试！");
 				return "login.jsp";
@@ -69,7 +71,7 @@ public class LoginController {
 		}else{
 			TeachAdminLogin taLogin = loginService.TALogin(username, password);
 			if(taLogin != null){
-				TAInfo taInfo = loginService.taInfo(taLogin.getTaId());
+				TAInfo taInfo = infoService.selectTAInfo(taLogin.getTaId());
 				if(taInfo == null){
 					model.put("error","用户信息查询出错，请重试！");
 					return "login.jsp";
@@ -77,7 +79,7 @@ public class LoginController {
 				//设置登录成功session标志
 				session.setAttribute("isLogin"+taLogin.getTaId(), "true"+taLogin.getTaId());
 				session.setAttribute("TAInfo", taInfo);
-				System.out.println("000000000");
+			//	System.out.println("000000000");
 				return "redirect:index.htm";
 			}
 		} 
@@ -98,7 +100,7 @@ public class LoginController {
 		if(stu != null){
 			session.setAttribute("isLogin"+stu.getStuId(), "true"+stu.getStuId());
 			StuInfo stuinfo = loginService.stuInfo(stu.getStuId());	
-			session.setAttribute("StuInfo", stuinfo);
+			session.setAttribute("stuInfo", stuinfo);
 			return "index.htm";
 		}
 		
@@ -118,9 +120,9 @@ public class LoginController {
 		ta = loginService.isBindta(openid);
 		if(ta != null){
 			session.setAttribute("isLogin"+ta.getTaId(), "true"+ta.getTaId());
-			TAInfo tainfo = loginService.taInfo(ta.getTaId());	
+			TAInfo tainfo = infoService.selectTAInfo(ta.getTaId());	
 			session.setAttribute("TAInfo", tainfo);
-			return "index.htm";
+			return "goindex.htm";
 		}
 		
 		return "tabind.jsp";
@@ -152,8 +154,9 @@ public class LoginController {
 			}
 			stuUser.setStuPassword("null");
 			session.setAttribute("StuLogin", stuUser);
+			session.setAttribute("stuInfo", infoService.selectStuInfo(stuUser.getStuId()));
 			session.setAttribute("isLogin"+stuUser.getStuId(), "true"+stuUser.getStuId());
-			return "redirect:index.htm";
+			return "redirect:goindex.htm";
 		}
 		
 		model.put("info", "用户名或密码错误！ ");
@@ -188,8 +191,9 @@ public class LoginController {
 			//防止密码保存到session中
 			taUser.setTaPassword("null");
 			session.setAttribute("TeachAdminLogin", taUser);
+			session.setAttribute("TAInfo", infoService.selectTAInfo(taUser.getTaId()));
 			session.setAttribute("isLogin"+taUser.getTaId(), "true"+taUser.getTaId());
-			return "redirect:index.htm";
+			return "redirect:goindex.htm";
 		}
 		
 		model.put("info", "用户名或密码错误！ ");
@@ -228,18 +232,14 @@ public class LoginController {
 	@RequestMapping("index.htm")
 	public String index(String ua){
 		if(ua != null && ua.equals("micromessenger")){
-			return Keys.mPREFIX+"index.jsp";
+			return Keys.PREFIX+"index.jsp";
 		}
 		return Keys.PREFIX+"index.jsp";	
 	}
 	
 	@RequestMapping("gopersonCenter.htm")
-	public String gopersonCenter(String openid,HttpSession session,HttpServletRequest request){
-		String ua = request.getHeader("user-agent").toLowerCase();
-		if (ua.indexOf("micromessenger") > 0) {// 是微信浏览器
-		  	session.setAttribute("openid",openid);
-		  	return "personCenter.htm?ua=micromessenger";	
-		}
+	public String gopersonCenter(){
+	//	System.out.println(request.getHeader("Referer"));
 		return "personCenter.htm";	
 	}
 	
@@ -252,30 +252,46 @@ public class LoginController {
 	 * 个人中心
 	 */
 	@RequestMapping("personCenter.htm")
-	public String personCenter(String ua,HttpSession session,ModelMap map){
-		if(session.getAttribute("error") != null && 
+	public String personCenter(HttpSession session,ModelMap map){
+		map.put("Specialtys", session.getAttribute("SpecSession"));
+		if(session.getAttribute("error") != null  && 
 		   session.getAttribute("error").equals("pwd_error")){
 			map.put("error", "密码错误，修改失败！！！");
 			session.removeAttribute("error");
+			System.out.println("+++err");
 		}
-		if(ua != null && ua.equals("micromessenger")){
-			return Keys.mPREFIX+"personCenter.jsp";
-		}
+
 		StuInfo stuInfo = (StuInfo) session.getAttribute("stuInfo");
-		map.put("StuInfo", stuInfo);
-		return Keys.PREFIX+"4/personCenter.jsp";	
+		if(null != stuInfo){
+			System.out.println(stuInfo.getStuPolitic());
+				map.put("StuInfo", stuInfo);
+
+				return Keys.PREFIX+"personCenter.jsp";
+
+			//return Keys.mPREFIX+"personCenter.jsp";
+		}else {
+			TAInfo taInfo = (TAInfo) session.getAttribute("TAInfo");
+			if(null != taInfo){
+				map.put("TAInfo", taInfo);
+				System.out.println(taInfo.getTaPolitic());
+				return Keys.PREFIX+"tpersonCenter.jsp";
+			}else{
+				return "index.jsp";
+			}
+			
+		}	
 	}
 
 
 
 	@RequestMapping("Welcome.htm")
 	public String Welcome(){
-		return Keys.PREFIX+"4/Welcome.html";	
+		return Keys.PREFIX+"Welcome.html";	
 	}
 	
 	@RequestMapping("Userinfo.htm")
 	public String Userinfo(){
-		return Keys.PREFIX+"4/Userinfo.jsp";	
+		return Keys.PREFIX+"Userinfo.jsp";	
 	}
 	
 

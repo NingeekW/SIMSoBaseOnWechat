@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import cn.ning3f1.wechat.dao.StuInfoMapper;
 import cn.ning3f1.wechat.dao.StuLoginMapper;
+import cn.ning3f1.wechat.dao.TeachAdminLoginMapper;
 import cn.ning3f1.wechat.dao.UserinfoMapper;
 import cn.ning3f1.wechat.domain.StuLogin;
 import cn.ning3f1.wechat.domain.Userinfo;
@@ -18,6 +19,8 @@ public class PwdServiceImpl implements PwdService {
 	private UserinfoMapper userinofMapper;
 	@Resource
 	private StuLoginMapper stuloginMapper;
+	@Resource
+	private TeachAdminLoginMapper  taLoginMapper;
 	
 	public StuLogin pwdCheck(String username, String opassword) {
 		//�?查原密码是否正确
@@ -26,9 +29,15 @@ public class PwdServiceImpl implements PwdService {
 		return stuloginMapper.stuLogin(username,opassword);
 	}
 	
-	public boolean pwdChange(String username, String npassword) {
+	public boolean stupwdChange(String stuid, String npassword) {
 		//�?查原密码是否正确
-		stuloginMapper.pwdChange(username,npassword);
+		stuloginMapper.pwdChange(stuid,npassword);
+		return true;
+	}
+	
+	public boolean tapwdChange(String taid, String npassword) {
+		//�?查原密码是否正确
+		taLoginMapper.pwdChange(taid,npassword);
 		return true;
 	}
 

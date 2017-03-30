@@ -28,5 +28,17 @@ public interface StuCourseMapper {
 	List<StuCourse> courseAllScore(String stuId);
 
 	int deleteBystuId(String stuId);
+
+	int addstuScore(String courseId, String stuId, String stuGrade);
+
+	int delScore(String courseId, String stuId);
+
+	int scoreupdate(String courseId, String stuId, String stuGrade);
+
+	List<StuCourse> AllScore();
+
+	List<StuCourse> courseScoreByName(String stuId, String courseName);
+
+	List<StuCourse> AllScoreByName(String courseName);
 	
 }

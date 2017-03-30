@@ -22,6 +22,8 @@ public class StuInfo {
     private String idNumber;
 
     private String stuSpecialty;
+    
+    private String stuSpecialtyName;
 
     public String getStuId() {
         return stuId;
@@ -110,4 +112,12 @@ public class StuInfo {
     public void setStuSpecialty(String stuSpecialty) {
         this.stuSpecialty = stuSpecialty == null ? null : stuSpecialty.trim();
     }
+
+	public String getStuSpecialtyName() {
+		return stuSpecialtyName;
+	}
+
+	public void setStuSpecialtyName(String stuSpecialtyName) {
+		this.stuSpecialtyName = stuSpecialtyName;
+	}
 }

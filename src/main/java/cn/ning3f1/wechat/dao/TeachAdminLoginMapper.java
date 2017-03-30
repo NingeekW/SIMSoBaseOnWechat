@@ -16,4 +16,8 @@ public interface TeachAdminLoginMapper {
     int updateByPrimaryKey(TeachAdminLogin record);
 
 	TeachAdminLogin loginCheck(String taId, String password);
+
+	void pwdChange(String taid, String npassword);
+
+	int insertTA(String taId, String taName);
 }

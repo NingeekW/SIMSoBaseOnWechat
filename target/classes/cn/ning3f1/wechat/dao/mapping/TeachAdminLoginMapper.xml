@@ -34,6 +34,11 @@
     values (#{taId,jdbcType=CHAR}, #{taName,jdbcType=CHAR}, #{taPassword,jdbcType=CHAR}
       )
   </insert>
+  <insert id="insertTA" parameterType="java.lang.String" >
+    insert into teach_admin_login (ta_id, ta_name
+      )
+    values (#{param1,jdbcType=CHAR}, #{param2,jdbcType=CHAR} )
+  </insert>
   <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.TeachAdminLogin" >
     insert into teach_admin_login
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -76,5 +81,11 @@
     set ta_name = #{taName,jdbcType=CHAR},
       ta_password = #{taPassword,jdbcType=CHAR}
     where ta_id = #{taId,jdbcType=CHAR}
+  </update>
+  
+    <update id="pwdChange" parameterType="java.util.Map" >
+		update teach_admin_login 
+		set ta_password = #{param2,jdbcType=VARCHAR}
+		where ta_id=#{param1,jdbcType=VARCHAR}
   </update>
 </mapper>

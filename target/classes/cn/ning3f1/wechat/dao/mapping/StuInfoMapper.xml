@@ -13,27 +13,30 @@
     <result column="stu_politic" property="stuPolitic" jdbcType="CHAR" />
     <result column="ID_number" property="idNumber" jdbcType="CHAR" />
     <result column="stu_Specialty" property="stuSpecialty" jdbcType="CHAR" />
+    <result column="spec_name" property="stuSpecialtyName" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     stu_id, stu_name, stu_sex, stu_birth, stu_nation, stu_Class_id, stu_Entrance_date, 
     stu_home, stu_politic, ID_number, stu_Specialty
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from stu_info
-    where stu_id = #{stuId,jdbcType=CHAR}
+    select stu.stu_id, stu.stu_name, stu.stu_sex, stu.stu_birth, stu.stu_nation, stu.stu_Class_id, stu.stu_Entrance_date, 
+    stu.stu_home, stu.stu_politic, ID_number, stu.stu_Specialty,spec.spec_name
+    from stu_info stu ,specialty spec
+    where stu_id = #{stuId,jdbcType=CHAR} and spec.spec_id = stu.stu_Specialty
   </select>
     <select id="selectByStuName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from stu_info
-    where stu_name like #{stuName,jdbcType=CHAR}
+    stu.stu_id, stu.stu_name, stu.stu_sex, stu.stu_birth, stu.stu_nation, stu.stu_Class_id, stu.stu_Entrance_date, 
+    stu.stu_home, stu.stu_politic, ID_number, stu.stu_Specialty,spec.spec_name
+    from stu_info stu ,specialty spec 
+    where spec.spec_id = stu.stu_Specialty and stu_name like #{stuName,jdbcType=CHAR}
   </select>
   <select id="selectAllStuInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from stu_info
+    select stu.stu_id, stu.stu_name, stu.stu_sex, stu.stu_birth, stu.stu_nation, stu.stu_Class_id, stu.stu_Entrance_date, 
+    stu.stu_home, stu.stu_politic, ID_number, stu.stu_Specialty,spec.spec_name
+    from stu_info stu ,specialty spec 
+    where spec.spec_id = stu.stu_Specialty
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from stu_info

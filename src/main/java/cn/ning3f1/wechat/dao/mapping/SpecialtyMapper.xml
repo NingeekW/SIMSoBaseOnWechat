@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.SpecialtyMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.Specialty" >
+    <id column="spec_id" property="specId" jdbcType="CHAR" />
+    <result column="spec_name" property="specName" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    spec_id, spec_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from specialty
+    where spec_id = #{specId,jdbcType=CHAR}
+  </select>
+  
+  <select id="selectSpecByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from specialty
+    where spec_name like #{specName,jdbcType=CHAR}
+  </select>
+  
+  <select id="selectSpec" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from specialty 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from specialty
+    where spec_id = #{specId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.Specialty" >
+    insert into specialty (spec_id, spec_name)
+    values (#{specId,jdbcType=CHAR}, #{specName,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.Specialty" >
+    insert into specialty
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specId != null" >
+        spec_id,
+      </if>
+      <if test="specName != null" >
+        spec_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specId != null" >
+        #{specId,jdbcType=CHAR},
+      </if>
+      <if test="specName != null" >
+        #{specName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.Specialty" >
+    update specialty
+    <set >
+      <if test="specName != null" >
+        spec_name = #{specName,jdbcType=CHAR},
+      </if>
+    </set>
+    where spec_id = #{specId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.Specialty" >
+    update specialty
+    set spec_name = #{specName,jdbcType=CHAR}
+    where spec_id = #{specId,jdbcType=CHAR}
+  </update>
+</mapper>

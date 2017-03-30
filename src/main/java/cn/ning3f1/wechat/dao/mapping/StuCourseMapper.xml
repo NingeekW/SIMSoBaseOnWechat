@@ -28,13 +28,35 @@
   </select>
   
   <select id="courseAllScore" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select c.course_name,c.credit
-    <include refid="Base_Column_List" />
+    select stu.course_id,stu.stu_id,stu.stu_grade,
+    c.course_name,c.credit
     from stu_course stu,course c
     where stu.course_id = c.course_id
       and stu_id = #{0,jdbcType=CHAR}
   </select>
   
+    <select id="courseScoreByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select stu.course_id,stu.stu_id,stu.stu_grade,
+    c.course_name,c.credit
+    from stu_course stu,course c
+    where stu.course_id = c.course_id
+      and stu.stu_id = #{0,jdbcType=CHAR} and c.course_name like #{1,jdbcType=CHAR}
+  </select>
+  
+ 
+  <select id="AllScore" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select stu.course_id,stu.stu_id,stu.stu_grade,
+    c.course_name,c.credit
+    from stu_course stu,course c
+    where stu.course_id = c.course_id
+  </select>
+  
+  <select id="AllScoreByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select stu.course_id,stu.stu_id,stu.stu_grade,
+    c.course_name,c.credit
+    from stu_course stu,course c
+    where stu.course_id = c.course_id and c.course_name like  #{0,jdbcType=CHAR}
+  </select>
   <select id="getAllInfo_page" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
@@ -51,7 +73,12 @@
     delete from stu_course
     where  stu_id = #{stuId,jdbcType=CHAR}
   </delete>
-  
+ 
+  <delete id="delScore" parameterType="java.lang.String" >
+    delete from stu_course
+    where  stu_id = #{1,jdbcType=CHAR}
+    and    course_id = #{0,jdbcType=CHAR}
+  </delete>  
   <insert id="insert" parameterType="cn.ning3f1.wechat.domain.StuCourse" >
     insert into stu_course (course_id, stu_id, stu_grade
       )
@@ -83,6 +110,14 @@
       </if>
     </trim>
   </insert>
+  
+  <insert id="addstuScore" parameterType="java.lang.String" >
+    insert into stu_course (course_id, stu_id, stu_grade
+      )
+    values (#{0,jdbcType=CHAR}, #{1,jdbcType=CHAR}, #{2,jdbcType=REAL}
+      )
+  </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.StuCourse" >
     update stu_course
     <set >
@@ -93,6 +128,14 @@
     where course_id = #{courseId,jdbcType=CHAR}
       and stu_id = #{stuId,jdbcType=CHAR}
   </update>
+
+  <update id="scoreupdate" parameterType="java.lang.String" >
+    update stu_course 
+    set stu_grade = #{2,jdbcType=REAL}
+    where course_id = #{0,jdbcType=CHAR}
+      and stu_id = #{1,jdbcType=CHAR}
+  </update>
+    
   <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.StuCourse" >
     update stu_course
     set stu_grade = #{stuGrade,jdbcType=REAL}

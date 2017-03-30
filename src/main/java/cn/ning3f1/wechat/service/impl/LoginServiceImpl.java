@@ -133,7 +133,7 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public int addTA(String taId, String taName) {
 		// TODO Auto-generated method stub
-		return 0;
+		return TAloginMapper.insertTA(taId,taName);
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class LoginServiceImpl implements LoginService{
 	@Override
 	public int delTA(String taId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return TAloginMapper.deleteByPrimaryKey(taId);
 	}
 
 	@Override

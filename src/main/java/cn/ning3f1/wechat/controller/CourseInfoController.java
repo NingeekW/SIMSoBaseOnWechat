@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import com.github.pagehelper.PageHelper;
 import cn.ning3f1.common.Keys;
 import cn.ning3f1.wechat.domain.Course;
 import cn.ning3f1.wechat.domain.EnterpressInfo;
+import cn.ning3f1.wechat.domain.TAInfo;
 import cn.ning3f1.wechat.service.CourseService;
 import cn.ning3f1.wechat.service.StuCourseService;
 
@@ -41,7 +43,7 @@ public class CourseInfoController {
 		System.out.println("+++++++++++++++++++++");
 		model.put("CourseInfos", list);
 		//model.put("pages", page);
-		return Keys.PREFIX+"4/courselist.jsp";	
+		return Keys.PREFIX+"courselist.jsp";	
 	}
 	/**
 	 * 根据名称查询课程
@@ -54,13 +56,13 @@ public class CourseInfoController {
 		List<Course> courselist=courseService.selectCourseByName(courseName);
 		model.put("CourseInfos", courselist);
 		//model.put("pages", page);
-		return Keys.PREFIX+"4/courselist.jsp";	
+		return Keys.PREFIX+"courselist.jsp";	
 	}
 	
 	//请求到增加课程信息界面
 	@RequestMapping("addcourse.htm")
 	public String addcourse(){
-		return Keys.PREFIX+"4/addcourse.jsp";	
+		return Keys.PREFIX+"addcourse.jsp";	
 	}
 	//添加课程信息到数据库
 	@RequestMapping("courseinfoadd.htm")
@@ -74,31 +76,51 @@ public class CourseInfoController {
 	public String courseinfo(String id,Map<String,Object> map){
 		Course courseInfo= courseService.selectCourseBykey(id);
 		map.put("courseInfo", courseInfo);
-		return Keys.PREFIX+"4/courseinfo.jsp";	
+		return Keys.PREFIX+"courseinfo.jsp";	
 	}
 	
 	//更新课程详细信息到数据库
 	@RequestMapping("courseinfoupdata.htm")
-	 public String updateCourse(Course course){
+	 public String updateCourse(Course course,HttpSession session){
+		TAInfo tainfosession = (TAInfo)session.getAttribute("TAInfo");
+		if("0".equals(tainfosession.getAdmin())){
+			courseService.updateCourse(course);
+		}else{
+			return "NoAdminCourse.htm";
+		}
 		System.out.println("update");
-		courseService.updateCourse(course);
 		return "courselist.htm";
 	}
 	//从数据库删除课程信息
 	@RequestMapping("coursedelete.htm")
-	 public String deleteEnterpress(String id,ModelMap model){
-		try {
-			courseService.deleteCourse(id);
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("当前课程不可删除");
-			model.put("error","当前课程已录入成绩，不可删除！");
-			List<Course> list=courseService.selectallCourse();
-			model.put("CourseInfos", list);
-			return Keys.PREFIX+"4/courselist.jsp";	
+	 public String deleteEnterpress(String id,ModelMap model,HttpSession session){
+		TAInfo tainfosession = (TAInfo)session.getAttribute("TAInfo");
+		if("0".equals(tainfosession.getAdmin())){
+			try {
+				courseService.deleteCourse(id);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("当前课程不可删除");
+				model.put("error","当前课程已录入成绩，不可删除！");
+				List<Course> list=courseService.selectallCourse();
+				model.put("CourseInfos", list);
+				return Keys.PREFIX+"courselist.jsp";	
+			}
+		}else{
+			return "NoAdminCourse.htm";
 		}
 		
+		
 		return "courselist.htm";
+	}
+	
+	@RequestMapping("NoAdminCourse.htm")
+	public String NoAdminCourse(ModelMap model){
+		System.out.println("无权限");
+		model.put("error","无权限，不可删除！");
+		List<Course> list=courseService.selectallCourse();
+		model.put("CourseInfos", list);
+		return Keys.PREFIX+"courselist.jsp";
 	}
 	
 	@RequestMapping("score.htm")

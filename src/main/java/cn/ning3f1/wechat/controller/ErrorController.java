@@ -10,6 +10,6 @@ public class ErrorController {
 	
 	@RequestMapping("error.htm")
 	public String enlist(){
-		return Keys.PREFIX+"4/error.jsp";	
+		return Keys.PREFIX+"error.jsp";	
 	}
 }

@@ -7,5 +7,6 @@ public interface PwdService {
 	public StuLogin pwdCheck(String stuId,String opassword);
 	public StuLogin TApwdCheck(String taId,String opassword);
 	public Userinfo pwdfindCheck(String stuId,String password);
-	public boolean pwdChange(String stuId, String npassword);
+	public boolean stupwdChange(String stuId, String npassword);
+	public boolean tapwdChange(String taId, String npassword);
 }
