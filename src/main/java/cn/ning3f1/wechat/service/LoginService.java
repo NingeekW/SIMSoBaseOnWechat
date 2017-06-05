@@ -1,10 +1,12 @@
 package cn.ning3f1.wechat.service;
 
+import cn.ning3f1.wechat.domain.AdminLogin;
 import cn.ning3f1.wechat.domain.StuInfo;
 import cn.ning3f1.wechat.domain.StuLogin;
 import cn.ning3f1.wechat.domain.TAInfo;
 import cn.ning3f1.wechat.domain.TeachAdminLogin;
 import cn.ning3f1.wechat.domain.Userinfo;
+import cn.ning3f1.wechat.domain.WechatBindAdmin;
 import cn.ning3f1.wechat.domain.WechatBindStu;
 import cn.ning3f1.wechat.domain.WechatBindTeachAdmin;
 
@@ -40,4 +42,16 @@ public interface LoginService {
 	public int addTA(String taId,String taName);
 	public int delStu(String stuId);
 	public int delTA(String taId);
+
+
+	public WechatBindAdmin isBindAdmin(String wechatUnionid);
+
+
+	public void unBindAdmin(String openid);
+
+
+	public AdminLogin AdminLogin(String username, String password);
+
+
+	public int BindAdmin(String adminId, String adminName, String openid);
 }

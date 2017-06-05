@@ -41,4 +41,6 @@ public interface StuCourseMapper {
 
 	List<StuCourse> AllScoreByName(String courseName);
 	
+	List<StuCourse> QuaryCredit(String stuId);
+	
 }

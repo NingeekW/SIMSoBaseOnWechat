@@ -30,4 +30,10 @@ public class TeachAdminLogin {
     public void setTaPassword(String taPassword) {
         this.taPassword = taPassword == null ? null : taPassword.trim();
     }
+
+	public void setAllNull() {
+		// TODO Auto-generated method stub
+		this.setTaPassword(null);
+		this.setTaName(null);
+	}
 }

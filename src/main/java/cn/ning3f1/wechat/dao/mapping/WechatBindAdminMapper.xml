@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.WechatBindAdminMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.WechatBindAdmin" >
+    <id column="admin_id" property="adminId" jdbcType="CHAR" />
+    <id column="Wechat_UnionID" property="wechatUnionid" jdbcType="CHAR" />
+    <result column="admin_name" property="adminName" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    admin_id, Wechat_UnionID, admin_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.ning3f1.wechat.domain.WechatBindAdminKey" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wechat_bind_admin
+    where admin_id = #{adminId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </select>
+      <select id="selectBind" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from wechat_bind_admin
+    where Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </select>
+    <delete id="unbind" parameterType="java.lang.String">
+    delete from wechat_bind_admin
+    where Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.WechatBindAdminKey" >
+    delete from wechat_bind_admin
+    where admin_id = #{adminId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </delete>
+  <insert id="bind" parameterType="java.util.Map" >
+    insert into wechat_bind_admin ( admin_id,admin_name,Wechat_UnionID
+      )
+    values (#{param1,jdbcType=CHAR}, #{param2,jdbcType=CHAR}, #{param3,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.WechatBindAdmin" >
+    insert into wechat_bind_admin (admin_id, Wechat_UnionID, admin_name
+      )
+    values (#{adminId,jdbcType=CHAR}, #{wechatUnionid,jdbcType=CHAR}, #{adminName,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.WechatBindAdmin" >
+    insert into wechat_bind_admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="wechatUnionid != null" >
+        Wechat_UnionID,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="wechatUnionid != null" >
+        #{wechatUnionid,jdbcType=CHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.WechatBindAdmin" >
+    update wechat_bind_admin
+    <set >
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=CHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.WechatBindAdmin" >
+    update wechat_bind_admin
+    set admin_name = #{adminName,jdbcType=CHAR}
+    where admin_id = #{adminId,jdbcType=CHAR}
+      and Wechat_UnionID = #{wechatUnionid,jdbcType=CHAR}
+  </update>
+</mapper>

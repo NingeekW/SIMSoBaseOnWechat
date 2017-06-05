@@ -29,15 +29,28 @@
   <![endif]--><script src="js/jquery.js"></script> 
       <script >
       $(function() {
-    	  	var error = "${error}";
-    			if(error){
-    				alert(error);
-    			}
-    			
-    			if("<%=session.getAttribute("TAInfo")%>" != "null"){
-    				document.getElementById("score").setAttribute("class","hidden");//隐藏score
-    			}
-    		});
+  	  	var error = "${error}";
+  			if(error){
+  				alert(error);
+  			}
+  			if("<%=session.getAttribute("stuInfo")%>" != "null"){
+  				document.getElementById("stulist").setAttribute("class","hidden");//隐藏stulist
+  				document.getElementById("stuscorelist").setAttribute("class","hidden");//隐藏stuscorelist
+  				document.getElementById("allscore").setAttribute("class","hidden");//隐藏allscore
+  				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
+  				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
+  				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
+  			}
+  			if("<%=session.getAttribute("TAInfo")%>" != "null"){
+  				document.getElementById("score").setAttribute("class","hidden");//隐藏score
+  				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
+  				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
+  				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
+  			}
+  			if("<%=session.getAttribute("AdminInfo")%>" != "null"){
+  				document.getElementById("score").setAttribute("class","hidden");//隐藏allscore
+  			}
+  		});
 	</script> 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -70,17 +83,17 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="images/y.jpg" class="img-circle" alt="User Image">
+          <img src="images/y.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-        	<p>${TAInfo.taName}${stuInfo.stuName}</p>
+        	<p>${TAInfo.taName}${stuInfo.stuName}${AdminInfo.adminName}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">欢迎使用学生信息管理系统</li>
         <li><a href="gopersonCenter.htm" id="gopersonCenter"><i class="fa fa-book"></i> <span>个人中心</span></a></li>
        
         <li><a href="allscore.htm" id="score" ><i class="fa fa-book"></i> <span>成绩查询</span></a></li>
@@ -125,7 +138,7 @@
               <form role="form" method="post" class="form-x" action="infoupdata.htm">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>教工号</label>
+                  <label>学号</label>
                   <input type="text" class="form-control"  readonly placeholder="${StuInfo.stuId}" value="${StuInfo.stuId}" name="stuId">
                 </div>
                 <div class="form-group">
@@ -135,7 +148,7 @@
                 <!-- select -->
                 <div class="form-group">
                   <label>性别</label>
-                  <select class="form-control"  placeholder="${StuInfo.stuSex}" value="${StuInfo.stuSex}" name="stuSex">
+                  <select class="form-control"   value="${StuInfo.stuSex}" name="stuSex">
                     <option value="男">男</option>
                     <option value="女">女</option>
                   </select>
@@ -153,7 +166,7 @@
                   <input type="text" class="form-control" required placeholder="${StuInfo.stuClassId}" value="${StuInfo.stuClassId}" name="stuClassId">
                 </div>
                 <div class="form-group">
-                  <label>入职时间</label>
+                  <label>入学时间</label>
                   <input type="date" class="form-control" required placeholder="${StuInfo.stuEntranceDate}" value="${StuInfo.stuEntranceDate}" name="stuEntranceDate">
                 </div>
                 <div class="form-group">
@@ -162,7 +175,7 @@
                 </div>
                 <div class="form-group">
                   <label>政治面貌</label>
-                  <select class="form-control"  >
+                  <select class="form-control"  name="stuPolitic">
                     <option value="${StuInfo.stuPolitic}">${StuInfo.stuPolitic}</option>
                     <option value="群众">群众</option>
             		<option value="党员">党员</option>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
 import cn.ning3f1.common.Keys;
+import cn.ning3f1.wechat.domain.AdminInfo;
 import cn.ning3f1.wechat.domain.Course;
 import cn.ning3f1.wechat.domain.EnterpressInfo;
 import cn.ning3f1.wechat.domain.Specialty;
@@ -35,10 +37,18 @@ public class SpecialtyController {
 	 * @param model
 	 * @return
 	 */
+	@RequestMapping("tospeclist.htm")
+	public String tospeclist(String openid,HttpServletRequest request){
+		System.out.println("tospeclist"+openid);
+		String ua = request.getHeader("user-agent").toLowerCase();
+		if (ua.indexOf("micromessenger") > 0) {// 是微信浏览器
+			request.getSession().setAttribute("openid", openid);		
+		}
+		return "speclist.htm";
+	}
 	@RequestMapping("speclist.htm")
-	public String speclist(ModelMap model,HttpServletRequest request){
+	public String speclist(String openid,ModelMap model,HttpServletRequest request){
 		//查询所有的专业信息
-
 		List<Specialty> list=infoService.selectallSpec();
 		System.out.println("查询所有的专业信息");
 		if(request.getHeader("Referer")!= null && request.getHeader("Referer").indexOf("addspec.htm") > 0){
@@ -102,7 +112,9 @@ public class SpecialtyController {
 	@RequestMapping("specdelete.htm")
 	 public String specDelete(String id,ModelMap model,HttpServletRequest request){
 		TAInfo tainfosession = (TAInfo)request.getSession().getAttribute("TAInfo");
-		if("0".equals(tainfosession.getAdmin())){
+		AdminInfo admininfosession = (AdminInfo)request.getSession().getAttribute("AdminInfo");
+		if(null != admininfosession 
+	   || (null != tainfosession &&"0".equals(tainfosession.getAdmin()))){
 			//管理员可进行删除
 			try {
 				infoService.deleteSpec(id);

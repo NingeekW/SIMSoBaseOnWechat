@@ -2,6 +2,7 @@ package cn.ning3f1.wechat.service;
 
 import java.util.List;
 
+import cn.ning3f1.wechat.domain.AdminInfo;
 import cn.ning3f1.wechat.domain.Course;
 import cn.ning3f1.wechat.domain.Specialty;
 import cn.ning3f1.wechat.domain.StuInfo;
@@ -43,6 +44,10 @@ public interface InfoService {
 	public Specialty selectSpecByid(String id);
 	public int updateSpec(Specialty spec);
 	public int deleteSpec(String id);
+	
+	
+	public AdminInfo selectAdminInfo(String adminId);
+	public void updateAdminInfo(AdminInfo adminInfo);
 
 	
 	

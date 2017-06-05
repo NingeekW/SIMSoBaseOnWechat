@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.ning3f1.common.Keys;
+import cn.ning3f1.wechat.domain.AdminInfo;
 import cn.ning3f1.wechat.domain.Course;
 import cn.ning3f1.wechat.domain.StuCourse;
 import cn.ning3f1.wechat.domain.StuInfo;
@@ -35,8 +36,18 @@ public class CourseScoreController {
 	 * @param model
 	 * @return
 	 */
+	@RequestMapping("tostuscorelist.htm")
+	public String tostusocrelist(String openid,HttpServletRequest request){
+		System.out.println("tostuscorelist"+openid);
+		String ua = request.getHeader("user-agent").toLowerCase();
+		if (ua.indexOf("micromessenger") > 0) {// 是微信浏览器
+			request.getSession().setAttribute("openid", openid);		
+		}
+
+		return "stuscorelist.htm";	
+	}
 	@RequestMapping("stuscorelist.htm")
-	public String stusocrelist(ModelMap model){
+	public String stusocrelist(ModelMap model,HttpSession session){
 		//查询所有的学生
 		List<StuInfo> list=infoService.queryStuInfo();
 		model.put("StuInfos", list);
@@ -48,6 +59,11 @@ public class CourseScoreController {
 		//查询某位学生的所有成绩
 		List<StuCourse> list=stucourseService.courseAllScore(id);
 		model.put("StuCourses", list);
+		for (StuCourse stuCourse : list) {
+			model.put("Allcredit", stuCourse.getAllcredit());
+			model.put("Uncredit", stuCourse.getUncredit());
+			break;
+		}
 		model.put("id", id);
 		return Keys.PREFIX+"couscorelist.jsp";
 	}
@@ -121,13 +137,19 @@ public class CourseScoreController {
 	public String allscore(HttpSession session,ModelMap model){
 		//查询学生的所有成绩
 		StuInfo stuInfo = (StuInfo) session.getAttribute("stuInfo");
-		TAInfo taInfo = (TAInfo) session.getAttribute("TAInfo");	
+		TAInfo taInfo = (TAInfo) session.getAttribute("TAInfo");
+		AdminInfo adminInfo = (AdminInfo)session.getAttribute("AdminInfo");
 		if(null != stuInfo){
 				List<StuCourse> list=stucourseService.courseAllScore(stuInfo.getStuId());
 				model.put("StuCourses", list);
+				for (StuCourse stuCourse : list) {
+					model.put("Allcredit", stuCourse.getAllcredit());
+					model.put("Uncredit", stuCourse.getUncredit());
+					break;
+				}
 				//学生仅查询自己的成绩
 				return Keys.PREFIX+"stuallscore.jsp";	
-		}else if(null != taInfo){
+		}else if(null != taInfo || null != adminInfo){
 			//教师用户查询所有的学生的信息
 			List<StuCourse> list=stucourseService.AllScore();
 			model.put("StuCourses", list);

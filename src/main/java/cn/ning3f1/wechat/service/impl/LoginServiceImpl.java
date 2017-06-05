@@ -5,18 +5,22 @@ import
 
 import org.springframework.stereotype.Service;
 
+import cn.ning3f1.wechat.dao.AdminLoginMapper;
 import cn.ning3f1.wechat.dao.StuInfoMapper;
 import cn.ning3f1.wechat.dao.StuLoginMapper;
 import cn.ning3f1.wechat.dao.TAInfoMapper;
 import cn.ning3f1.wechat.dao.TeachAdminLoginMapper;
 import cn.ning3f1.wechat.dao.UserinfoMapper;
+import cn.ning3f1.wechat.dao.WechatBindAdminMapper;
 import cn.ning3f1.wechat.dao.WechatBindStuMapper;
 import cn.ning3f1.wechat.dao.WechatBindTeachAdminMapper;
 import cn.ning3f1.wechat.domain.StuInfo;
 import cn.ning3f1.wechat.domain.StuLogin;
 import cn.ning3f1.wechat.domain.TAInfo;
+import cn.ning3f1.wechat.domain.AdminLogin;
 import cn.ning3f1.wechat.domain.TeachAdminLogin;
 import cn.ning3f1.wechat.domain.Userinfo;
+import cn.ning3f1.wechat.domain.WechatBindAdmin;
 import cn.ning3f1.wechat.domain.WechatBindStu;
 import cn.ning3f1.wechat.domain.WechatBindTeachAdmin;
 import cn.ning3f1.wechat.service.LoginService;
@@ -37,7 +41,11 @@ public class LoginServiceImpl implements LoginService{
 	@Resource
 	private TeachAdminLoginMapper TAloginMapper;
 	@Resource
+	private AdminLoginMapper AdminloginMapper;
+	@Resource
 	private TAInfoMapper tainfoMapper;
+	@Resource
+	private WechatBindAdminMapper wechatbindAdminMapper;
 
 	public Userinfo userLogin(String username,String password){
 		
@@ -123,7 +131,7 @@ public class LoginServiceImpl implements LoginService{
 		return tainfoMapper.selectByPrimaryKey(taId);
 	}
 
-	@SuppressWarnings("null")
+
 	@Override
 	public int addStu(String stuId, String stuName) {
 		// TODO Auto-generated method stub
@@ -158,6 +166,30 @@ public class LoginServiceImpl implements LoginService{
 	public int unBindByTAid(String TAId) {
 		// TODO Auto-generated method stub
 		return wechatbindTAMapper.unbindByTAid(TAId);
+	}
+
+	@Override
+	public WechatBindAdmin isBindAdmin(String wechatUnionid) {
+		// TODO Auto-generated method stub
+		return wechatbindAdminMapper.selectBind(wechatUnionid);
+	}
+
+	@Override
+	public void unBindAdmin(String openid) {
+		// TODO Auto-generated method stub
+		wechatbindAdminMapper.unbind(openid);
+	}
+
+	@Override
+	public AdminLogin AdminLogin(String username, String password) {
+		// TODO Auto-generated method stub
+		return AdminloginMapper.loginCheck(username,password);
+	}
+
+	@Override
+	public int BindAdmin(String adminId, String adminName, String openid) {
+		// TODO Auto-generated method stub
+		return wechatbindAdminMapper.bind(adminId, adminName, openid);
 	}
 
 

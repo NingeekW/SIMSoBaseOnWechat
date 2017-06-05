@@ -7,6 +7,8 @@
     <result column="course_name" property="courseName" jdbcType="CHAR" />
     <result column="credit" property="credit" jdbcType="CHAR" />
     <result column="stu_grade" property="stuGrade" jdbcType="REAL" />
+    <result column="allcredit" property="allcredit" jdbcType="REAL" />
+    <result column="uncredit" property="uncredit" jdbcType="REAL" />
   </resultMap>
   <sql id="Base_Column_List" >
     course_id, stu_id, stu_grade
@@ -57,6 +59,24 @@
     from stu_course stu,course c
     where stu.course_id = c.course_id and c.course_name like  #{0,jdbcType=CHAR}
   </select>
+  
+  <!-- 用来查询某位学生的成绩及学分情况 -->
+   <select id="QuaryCredit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select * from
+	(select stu.course_id,stu.stu_id,stu.stu_grade,
+    c.course_name,c.credit
+    from stu_course stu,course c
+    where stu.course_id = c.course_id and stu.stu_id = #{0,jdbcType=CHAR}) a,
+	(select sum(credit) uncredit 
+	from stu_course stu,sims.course cou 
+	where cou.course_id = stu.course_id and (60 &gt; stu.stu_grade) and stu.stu_id = #{0,jdbcType=CHAR} ) un,
+	(select sum(credit) allcredit 
+	from stu_course stu,sims.course cou 
+	where cou.course_id = stu.course_id and stu.stu_id = #{0,jdbcType=CHAR} ) ss
+
+			       
+  </select>
+  
   <select id="getAllInfo_page" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />

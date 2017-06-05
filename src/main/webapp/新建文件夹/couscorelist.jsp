@@ -107,7 +107,7 @@
 					<li><a href="stulist.htm" id="stulist"><i
 							class="fa fa-book"></i> <span>学生信息管理（教师）</span></a></li>
 					<li><a href="talist.htm" id="talist"><i class="fa fa-book"></i>
-							<span>教师信息管理（教师）</span></a></li>
+							<span>教师信息管理（管理员）</span></a></li>
 					<li><a href="stuscorelist.htm" id="stuscorelist"><i
 							class="fa fa-book"></i> <span>成绩录入（教师）</span></a></li>
 					<li><a href="allscore.htm" id="allscore"><i
@@ -161,8 +161,10 @@
 								class="btn  btn-info">添加成绩</button>
 								<button type="submit" 
 								onclick="javascript:window.location.href='stuscorelist.htm'" 
-								class="btn  btn-info">返回</button>
+								class="btn  btn-info">111</button>
+								
 							</div>
+						
 																<!-- 搜索框 -->
 							<form action="StuByName.htm" method="post" id="SelectByName">
 								<div class="input-group input-group-lg">
@@ -249,7 +251,9 @@
 															<th rowspan="1" colspan="1">操作</th>
 														</tr>
 													</tfoot>
+													
 												</table>
+													
 											</div>
 										</div>
 									</div>

@@ -20,4 +20,6 @@ public interface TeachAdminLoginMapper {
 	void pwdChange(String taid, String npassword);
 
 	int insertTA(String taId, String taName);
+
+	TeachAdminLogin pwdfindCheck(String username, String name);
 }

@@ -4,7 +4,9 @@ public class StuCourse extends StuCourseKey {
     private Float stuGrade;
     private String courseName;
     private String credit; 
-
+    private String allcredit;
+    private String uncredit;
+    
     public Float getStuGrade() {
         return stuGrade;
     }
@@ -27,5 +29,21 @@ public class StuCourse extends StuCourseKey {
 
 	public void setCredit(String credit) {
 		this.credit = credit;
+	}
+
+	public String getUncredit() {
+		return uncredit;
+	}
+
+	public void setUncredit(String uncredit) {
+		this.uncredit = uncredit;
+	}
+
+	public String getAllcredit() {
+		return allcredit;
+	}
+
+	public void setAllcredit(String allcredit) {
+		this.allcredit = allcredit;
 	}
 }

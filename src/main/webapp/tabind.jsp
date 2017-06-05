@@ -16,6 +16,10 @@
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			$("img[src='gercode']").click(function() {
+				$(this).attr("src", "gercode?no-cache=" + Math.random());
+			});
+			
 			var info = "${info}";
 			if(info){
 				alert(info);
@@ -51,6 +55,16 @@
 									<input type="password" class="input input-big" name="password"
 										placeholder="登录密码" data-validate="required:请填写密码" /> <span
 										class="icon icon-key margin-small"></span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="field">
+									<input type="text" class="input input-big" name="vercode"
+										placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码" />
+									<img src="gencode" alt="" width="100" height="32"
+										class="passcode" style="height: 43px; cursor: pointer;"
+										onclick="this.src=this.src+'?'">
+
 								</div>
 							</div>
 						</div>

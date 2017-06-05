@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.AdminInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.AdminInfo" >
+    <id column="admin_id" property="adminId" jdbcType="CHAR" />
+    <result column="admin_name" property="adminName" jdbcType="CHAR" />
+    <result column="admin_sex" property="adminSex" jdbcType="CHAR" />
+    <result column="admin_birth" property="adminBirth" jdbcType="DATE" />
+    <result column="admin_nation" property="adminNation" jdbcType="CHAR" />
+    <result column="admin_Entrance_date" property="adminEntranceDate" jdbcType="DATE" />
+    <result column="admin_home" property="adminHome" jdbcType="CHAR" />
+    <result column="admin_politic" property="adminPolitic" jdbcType="CHAR" />
+    <result column="ID_number" property="idNumber" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    admin_id, admin_name, admin_sex, admin_birth, admin_nation, admin_Entrance_date, 
+    admin_home, admin_politic, ID_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_info
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from admin_info
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.AdminInfo" >
+    insert into admin_info (admin_id, admin_name, admin_sex, 
+      admin_birth, admin_nation, admin_Entrance_date, 
+      admin_home, admin_politic, ID_number
+      )
+    values (#{adminId,jdbcType=CHAR}, #{adminName,jdbcType=CHAR}, #{adminSex,jdbcType=CHAR}, 
+      #{adminBirth,jdbcType=DATE}, #{adminNation,jdbcType=CHAR}, #{adminEntranceDate,jdbcType=DATE}, 
+      #{adminHome,jdbcType=CHAR}, #{adminPolitic,jdbcType=CHAR}, #{idNumber,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.AdminInfo" >
+    insert into admin_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="adminSex != null" >
+        admin_sex,
+      </if>
+      <if test="adminBirth != null" >
+        admin_birth,
+      </if>
+      <if test="adminNation != null" >
+        admin_nation,
+      </if>
+      <if test="adminEntranceDate != null" >
+        admin_Entrance_date,
+      </if>
+      <if test="adminHome != null" >
+        admin_home,
+      </if>
+      <if test="adminPolitic != null" >
+        admin_politic,
+      </if>
+      <if test="idNumber != null" >
+        ID_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=CHAR},
+      </if>
+      <if test="adminSex != null" >
+        #{adminSex,jdbcType=CHAR},
+      </if>
+      <if test="adminBirth != null" >
+        #{adminBirth,jdbcType=DATE},
+      </if>
+      <if test="adminNation != null" >
+        #{adminNation,jdbcType=CHAR},
+      </if>
+      <if test="adminEntranceDate != null" >
+        #{adminEntranceDate,jdbcType=DATE},
+      </if>
+      <if test="adminHome != null" >
+        #{adminHome,jdbcType=CHAR},
+      </if>
+      <if test="adminPolitic != null" >
+        #{adminPolitic,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.AdminInfo" >
+    update admin_info
+    <set >
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=CHAR},
+      </if>
+      <if test="adminSex != null" >
+        admin_sex = #{adminSex,jdbcType=CHAR},
+      </if>
+      <if test="adminBirth != null" >
+        admin_birth = #{adminBirth,jdbcType=DATE},
+      </if>
+      <if test="adminNation != null" >
+        admin_nation = #{adminNation,jdbcType=CHAR},
+      </if>
+      <if test="adminEntranceDate != null" >
+        admin_Entrance_date = #{adminEntranceDate,jdbcType=DATE},
+      </if>
+      <if test="adminHome != null" >
+        admin_home = #{adminHome,jdbcType=CHAR},
+      </if>
+      <if test="adminPolitic != null" >
+        admin_politic = #{adminPolitic,jdbcType=CHAR},
+      </if>
+      <if test="idNumber != null" >
+        ID_number = #{idNumber,jdbcType=CHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.AdminInfo" >
+    update admin_info
+    set admin_name = #{adminName,jdbcType=CHAR},
+      admin_sex = #{adminSex,jdbcType=CHAR},
+      admin_birth = #{adminBirth,jdbcType=DATE},
+      admin_nation = #{adminNation,jdbcType=CHAR},
+      admin_Entrance_date = #{adminEntranceDate,jdbcType=DATE},
+      admin_home = #{adminHome,jdbcType=CHAR},
+      admin_politic = #{adminPolitic,jdbcType=CHAR},
+      ID_number = #{idNumber,jdbcType=CHAR}
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </update>
+</mapper>

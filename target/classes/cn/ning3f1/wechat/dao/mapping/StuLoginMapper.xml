@@ -24,6 +24,13 @@
     and stu_password = #{param2,jdbcType=CHAR}
   </select>
   
+  <select id="pwdfindCheck" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stu_login
+    where stu_id = #{param1, jdbcType=CHAR}
+    and stu_name = #{param2,jdbcType=CHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from stu_login
     where stu_id = #{stuId,jdbcType=CHAR}

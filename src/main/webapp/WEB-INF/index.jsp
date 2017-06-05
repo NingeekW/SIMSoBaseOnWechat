@@ -30,22 +30,28 @@
   <script src="js/jquery.js"></script> 
   <script type="text/javascript">
   $(function() {
-  	var error = "${error}";
-		if(error){
-			alert(error);
-		}
-		if("<%=session.getAttribute("stuInfo")%>" != "null"){
-			document.getElementById("stulist").setAttribute("class","hidden");//隐藏stulist
-			document.getElementById("stuscorelist").setAttribute("class","hidden");//隐藏stuscorelist
-			document.getElementById("allscore").setAttribute("class","hidden");//隐藏allscore
-			document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
-			document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
-			document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
-		}
-		if("<%=session.getAttribute("TAInfo")%>" != "null"){
-			document.getElementById("score").setAttribute("class","hidden");//隐藏score
-		}
-	});
+	  	var error = "${error}";
+			if(error != ""){
+				alert(error);
+			}
+			if("<%=session.getAttribute("stuInfo")%>" != "null"){
+				document.getElementById("stulist").setAttribute("class","hidden");//隐藏stulist
+				document.getElementById("stuscorelist").setAttribute("class","hidden");//隐藏stuscorelist
+				document.getElementById("allscore").setAttribute("class","hidden");//隐藏allscore
+				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
+				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
+				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
+			}
+			if("<%=session.getAttribute("TAInfo")%>" != "null" ){
+				document.getElementById("score").setAttribute("class","hidden");//隐藏score
+				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
+				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
+				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
+			}
+			if("<%=session.getAttribute("AdminInfo")%>" != "null"){
+  				document.getElementById("score").setAttribute("class","hidden");//隐藏allscore
+  			}
+		});
     
 	</script> 
 </head>
@@ -79,20 +85,20 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="images/y.jpg" class="img-circle" alt="User Image">
+          <img src="images/y.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-        	<p>${TAInfo.taName}${stuInfo.stuName}</p>
+        	<p>${TAInfo.taName}${stuInfo.stuName}${AdminInfo.adminName}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
+        <li class="header">欢迎使用学生信息管理系统</li>
         <li><a href="gopersonCenter.htm" id="gopersonCenter"><i class="fa fa-book"></i> <span>个人中心</span></a></li>
         <li><a href="stulist.htm" id="stulist"><i class="fa fa-book"></i> <span>学生信息管理（教师）</span></a></li>
-        <li><a href="talist.htm" id="talist"><i class="fa fa-book"></i> <span>教师信息管理（教师）</span></a></li>
+        <li><a href="talist.htm" id="talist"><i class="fa fa-book"></i> <span>教师信息管理（管理员）</span></a></li>
         <li><a href="stuscorelist.htm" id="stuscorelist"><i class="fa fa-book"></i> <span>成绩录入（教师）</span></a></li>
         <li><a href="allscore.htm" id="allscore"><i class="fa fa-book"></i> <span>成绩查询（教师）</span></a></li>
         <li><a href="allscore.htm" id="score" ><i class="fa fa-book"></i> <span>成绩查询</span></a></li>
@@ -135,7 +141,120 @@
           </div>
           <!-- /.box -->
         </div>
+
         <!--/.col (right) -->
+      </div>
+      <div class="row">
+                     <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>个人中心</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-user"></i>
+            </div>
+            <a href="gopersonCenter.htm" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+                             <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>密码修改</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa  fa-cog"></i>
+            </div>
+            <a href="changepwd.htm" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+                             <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>成绩查询</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa  fa-search"></i>
+            </div>
+            <a href="allscore.htm" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+                             
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>学院简介</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-book"></i>
+            </div>
+            <a href="../StudentInfoMS/xyjj.jsp" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+        <!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>心理健康</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-eye"></i>
+            </div>
+            <a href="http://xlcp.witpt.edu.cn/" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+        <!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>学院新闻</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-flag-o"></i>
+            </div>
+            <a href="../StudentInfoMS/xyxw.jsp" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+        <!-- ./col -->
+               <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>通知公告</h3>
+
+              <p>武汉工程大学邮电与信息工程学院</p>
+            </div>
+            <div class="icon">
+              <i class="fa  fa-bell"></i>
+            </div>
+            <a href="../StudentInfoMS/ggtz.jsp" class="small-box-footer">详情 <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+
+        </div>
+        <!-- ./col -->
       </div>
       <!-- /.row -->
     </section>
@@ -144,9 +263,9 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.7
+      <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2016 <a href="https://ning3f1.cn">学生信息管理系统</a>.</strong> All rights
+    <strong>Copyright &copy; 2016 <a href="https://www.ning3f1.cn/StudentInfoMS">学生信息管理系统</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -167,11 +286,6 @@
             <a href="javascript:void(0)">
               <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
             </a>
           </li>
           <li>
@@ -190,11 +304,6 @@
             <a href="javascript:void(0)">
               <i class="menu-icon fa fa-file-code-o bg-green"></i>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
             </a>
           </li>
         </ul>
@@ -204,10 +313,6 @@
         <ul class="control-sidebar-menu">
           <li>
             <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
 
               <div class="progress progress-xxs">
                 <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
@@ -216,26 +321,13 @@
           </li>
           <li>
             <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
             </a>
           </li>
           <li>
             <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
+
             </a>
           </li>
           <li>

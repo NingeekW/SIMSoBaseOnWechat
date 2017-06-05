@@ -30,4 +30,10 @@ public class StuLogin {
     public void setStuPassword(String stuPassword) {
         this.stuPassword = stuPassword == null ? null : stuPassword.trim();
     }
+
+	public void setAllNull() {
+		// TODO Auto-generated method stub
+		this.setStuPassword(null);
+		this.setStuName(null);
+	}
 }

@@ -1,6 +1,5 @@
 package cn.ning3f1.wechat.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-
 import cn.ning3f1.common.Keys;
 import cn.ning3f1.wechat.domain.Course;
-import cn.ning3f1.wechat.domain.EnterpressInfo;
 import cn.ning3f1.wechat.domain.TAInfo;
 import cn.ning3f1.wechat.service.CourseService;
 import cn.ning3f1.wechat.service.StuCourseService;
@@ -36,9 +31,20 @@ public class CourseInfoController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("courselist.htm")
-	public String courselist(ModelMap model){
+	@RequestMapping("tocourselist.htm")
+	public String tocourselist(String openid,HttpServletRequest request){
+		System.out.println("tocourselist"+openid);
+		String ua = request.getHeader("user-agent").toLowerCase();
+		if (ua.indexOf("micromessenger") > 0) {// 是微信浏览器
+			request.getSession().setAttribute("openid", openid);		
+		}
 		//查询所有的课程信息
+		return "courselist.htm";	
+	}
+	@RequestMapping("courselist.htm")
+	public String courselist(HttpSession session,ModelMap model){
+		//查询所有的课程信息
+
 		List<Course> list=courseService.selectallCourse();
 		System.out.println("+++++++++++++++++++++");
 		model.put("CourseInfos", list);

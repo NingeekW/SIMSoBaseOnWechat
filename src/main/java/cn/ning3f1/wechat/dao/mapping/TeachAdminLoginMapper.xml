@@ -24,6 +24,14 @@
     and ta_password = #{param2,jdbcType=CHAR}
   </select>
   
+   <select id="pwdfindCheck" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from teach_admin_login
+    where ta_id = #{param1, jdbcType=CHAR}
+    and ta_name = #{param2,jdbcType=CHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from teach_admin_login
     where ta_id = #{taId,jdbcType=CHAR}

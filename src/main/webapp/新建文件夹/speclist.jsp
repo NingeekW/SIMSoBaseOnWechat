@@ -103,7 +103,7 @@
 					<li><a href="stulist.htm" id="stulist"><i
 							class="fa fa-book"></i> <span>学生信息管理（教师）</span></a></li>
 					<li><a href="talist.htm" id="talist"><i class="fa fa-book"></i>
-							<span>教师信息管理（教师）</span></a></li>
+							<span>教师信息管理（管理员）</span></a></li>
 					<li><a href="stuscorelist.htm" id="stuscorelist"><i
 							class="fa fa-book"></i> <span>成绩录入（教师）</span></a></li>
 					<li><a href="allscore.htm" id="allscore"><i

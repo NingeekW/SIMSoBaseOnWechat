@@ -25,7 +25,7 @@ public class StuCourseServiceImpl implements StuCourseService{
 	@Override
 	public List<StuCourse> courseAllScore(String stuId) {
 		// TODO Auto-generated method stub
-		return stuCourseMapper.courseAllScore(stuId);
+		return stuCourseMapper.QuaryCredit(stuId);
 	}
 
 	@Override

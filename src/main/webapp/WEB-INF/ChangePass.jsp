@@ -32,22 +32,28 @@
   <![endif]--><script src="js/jquery.js"></script> 
       <script >
       $(function() {
-    	  	var error = "${error}";
-    			if(error){
-    				alert(error);
-    			}
-    			if("<%=session.getAttribute("stuInfo")%>" != "null"){
-    				document.getElementById("stulist").setAttribute("class","hidden");//隐藏stulist
-    				document.getElementById("stuscorelist").setAttribute("class","hidden");//隐藏stuscorelist
-    				document.getElementById("allscore").setAttribute("class","hidden");//隐藏allscore
-    				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
-    				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
-    				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
-    			}
-    			if("<%=session.getAttribute("TAInfo")%>" != "null"){
-    				document.getElementById("score").setAttribute("class","hidden");//隐藏score
-    			}
-    		});
+  	  	var error = "${error}";
+  			if(error){
+  				alert(error);
+  			}
+  			if("<%=session.getAttribute("stuInfo")%>" != "null"){
+  				document.getElementById("stulist").setAttribute("class","hidden");//隐藏stulist
+  				document.getElementById("stuscorelist").setAttribute("class","hidden");//隐藏stuscorelist
+  				document.getElementById("allscore").setAttribute("class","hidden");//隐藏allscore
+  				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
+  				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
+  				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
+  			}
+  			if("<%=session.getAttribute("TAInfo")%>" != "null" ){
+  				document.getElementById("score").setAttribute("class","hidden");//隐藏score
+  				document.getElementById("talist").setAttribute("class","hidden");//隐藏talist
+  				document.getElementById("spec").setAttribute("class","hidden");//隐藏spec
+  				document.getElementById("courselist").setAttribute("class","hidden");//隐藏courselist
+  			}
+  			if("<%=session.getAttribute("AdminInfo")%>" != "null"){
+  				document.getElementById("score").setAttribute("class","hidden");//隐藏allscore
+  			}
+  		});
 	</script> 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -77,11 +83,11 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="images/y.jpg" class="img-circle"
+						<img src="images/y.png" class="img-circle"
 							alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>${stuInfo.stuName}</p>
+						<p>${stuInfo.stuName}${TAInfo.taName}</p>
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
 				</div>
@@ -90,13 +96,13 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
-					<li class="header">MAIN NAVIGATION</li>
+					<li class="header">欢迎使用学生信息管理系统</li>
 					<li><a href="gopersonCenter.htm" id="gopersonCenter"><i
 							class="fa fa-book"></i> <span>个人中心</span></a></li>
 					<li><a href="stulist.htm" id="stulist"><i
 							class="fa fa-book"></i> <span>学生信息管理（教师）</span></a></li>
 					<li><a href="talist.htm" id="talist"><i class="fa fa-book"></i>
-							<span>教师信息管理（教师）</span></a></li>
+							<span>教师信息管理（管理员）</span></a></li>
 					<li><a href="stuscorelist.htm" id="stuscorelist"><i
 							class="fa fa-book"></i> <span>成绩录入（教师）</span></a></li>
 					<li><a href="allscore.htm" id="allscore"><i
@@ -148,7 +154,7 @@
 										<!-- text input -->
 
 										<label style="line-height: 33px;"> <%--输出session中的用户名 --%>
-											${stuInfo.stuId} ${TAInfo.taId}
+											${stuInfo.stuId} ${TAInfo.taId}${AdminInfo.adminId}
 										</label>
 									</div>
 

@@ -20,4 +20,6 @@ public interface StuLoginMapper {
     int updateByPrimaryKey(StuLogin record);
 
 	int insertStu(String stuId, String stuName);
+
+	StuLogin pwdfindCheck(String username, String name);
 }

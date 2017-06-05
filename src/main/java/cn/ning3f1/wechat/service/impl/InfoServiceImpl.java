@@ -6,9 +6,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.ning3f1.wechat.dao.AdminInfoMapper;
 import cn.ning3f1.wechat.dao.SpecialtyMapper;
 import cn.ning3f1.wechat.dao.StuInfoMapper;
 import cn.ning3f1.wechat.dao.TAInfoMapper;
+import cn.ning3f1.wechat.domain.AdminInfo;
 import cn.ning3f1.wechat.domain.Course;
 import cn.ning3f1.wechat.domain.Specialty;
 import cn.ning3f1.wechat.domain.StuInfo;
@@ -21,6 +23,8 @@ public class InfoServiceImpl implements InfoService {
 	private StuInfoMapper stuinfoMapper;
 	@Resource
 	private TAInfoMapper tainfoMapper;
+	@Resource
+	private AdminInfoMapper admininfoMapper;
 	@Resource
 	private SpecialtyMapper SpecMapper;
 	
@@ -154,6 +158,18 @@ public class InfoServiceImpl implements InfoService {
 	public List<TAInfo> TAInfoByname(String taName) {
 		// TODO Auto-generated method stub
 		return tainfoMapper.TAInfoByname(taName);
+	}
+
+	@Override
+	public AdminInfo selectAdminInfo(String adminId) {
+		// TODO Auto-generated method stub
+		return admininfoMapper.selectByPrimaryKey(adminId);
+	}
+
+	@Override
+	public void updateAdminInfo(AdminInfo adminInfo) {
+		// TODO Auto-generated method stub
+		admininfoMapper.updateByPrimaryKey(adminInfo);
 	}
 
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ning3f1.wechat.dao.AdminLoginMapper" >
+  <resultMap id="BaseResultMap" type="cn.ning3f1.wechat.domain.AdminLogin" >
+    <id column="admin_id" property="adminId" jdbcType="CHAR" />
+    <result column="admin_name" property="adminName" jdbcType="CHAR" />
+    <result column="admin_password" property="adminPassword" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    admin_id, admin_name, admin_password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_login
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </select>
+    <select id="loginCheck" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_login
+    where admin_id = #{param1,jdbcType=CHAR}
+    and admin_password = #{param2,jdbcType=CHAR}
+  </select>
+  <select id="pwdfindCheck" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from admin_login
+    where admin_id = #{param1,jdbcType=CHAR}
+    and admin_name = #{param2,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from admin_login
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.ning3f1.wechat.domain.AdminLogin" >
+    insert into admin_login (admin_id, admin_name, admin_password
+      )
+    values (#{adminId,jdbcType=CHAR}, #{adminName,jdbcType=CHAR}, #{adminPassword,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ning3f1.wechat.domain.AdminLogin" >
+    insert into admin_login
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminName != null" >
+        admin_name,
+      </if>
+      <if test="adminPassword != null" >
+        admin_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=CHAR},
+      </if>
+      <if test="adminName != null" >
+        #{adminName,jdbcType=CHAR},
+      </if>
+      <if test="adminPassword != null" >
+        #{adminPassword,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ning3f1.wechat.domain.AdminLogin" >
+    update admin_login
+    <set >
+      <if test="adminName != null" >
+        admin_name = #{adminName,jdbcType=CHAR},
+      </if>
+      <if test="adminPassword != null" >
+        admin_password = #{adminPassword,jdbcType=CHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ning3f1.wechat.domain.AdminLogin" >
+    update admin_login
+    set admin_name = #{adminName,jdbcType=CHAR},
+      admin_password = #{adminPassword,jdbcType=CHAR}
+    where admin_id = #{adminId,jdbcType=CHAR}
+  </update>
+      <update id="pwdChange" parameterType="java.util.Map" >
+		update admin_login 
+		set admin_password = #{param2,jdbcType=VARCHAR}
+		where admin_id=#{param1,jdbcType=VARCHAR}
+  </update>
+</mapper>
